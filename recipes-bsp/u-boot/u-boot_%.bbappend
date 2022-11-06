@@ -30,3 +30,5 @@ do_deploy:append() {
 }
 
 DEPENDS += "isp-native"
+# requires mkimage existance to be deployed correctly
+do_deploy[depends] += "u-boot-mkimage-native:do_deploy"
