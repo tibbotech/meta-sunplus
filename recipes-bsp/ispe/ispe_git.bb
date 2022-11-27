@@ -1,5 +1,5 @@
 
-SRCREV = "cdb02f9817d47ceb97f53f8c805c0bf59e845e2f"
+SRCREV = "68360ada5bea75014dcba3e4389578601361d18e"
 
 SRC_URI  = "git://github.com/tibbotech/ispe.git;protocol=https;branch=main"
 #SRC_URI += "file://uEnv.txt.sdcard2.patch"
