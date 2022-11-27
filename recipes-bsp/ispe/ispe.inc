@@ -13,7 +13,11 @@ do_install() {
  oe_runmake 'DESTDIR=${D}/${bindir}' install
 }
 
-#addtask do_deploy after do_compile before do_build
+do_deploy() {
+ oe_runmake 'DESTDIR=${DEPLOYDIR}' install
+}
+
+addtask do_deploy after do_compile before do_build
 
 #do_configure[noexec] = "1"
 
