@@ -104,6 +104,7 @@ IMAGE_CMD_isp () {
     cat ${ISPEDIR}ispe-templates/sp7021.hdr.T | sed -e "s/{T_OFF}/0x${LP}/" -e "s/{T_SIZE}/0x${TLh}/" > ${ISP_TMPDIR}/head.script.txt
     ${ISPEDIR}ispe-helpers/script_enc.sh "Init ISP Script" ${ISP_TMPDIR}/head.script.txt ${ISP_TMPDIR}/head.script.raw
     ispe ${ISP_IMG} head sets ${ISP_TMPDIR}/head.script.raw
+    ln -sf ${ISP_IMG} ${DEPLOY_DIR_IMAGE}/${c}/ISPBOOOT.BIN
     i=$(expr $i + 1)
  done
 }
