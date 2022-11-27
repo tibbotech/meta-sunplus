@@ -10,7 +10,7 @@ dv_2_arr () {
  i=0
  IFS="${3}"
  for p in ${2}; do
-   if [ $i == $1 ]; then  echo "$p";  fi;
+   if [ $i -eq $1 ]; then  echo "$p";  fi;
    i=$(expr $i + 1)
  done
  echo ""
