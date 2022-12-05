@@ -113,6 +113,7 @@ IMAGE_CMD_isp () {
 python () {
     bsa = d.getVarFlags('ISP_SETBOO')
     tsa = d.getVarFlags('ISP_BOOTYP')
+    #bb.note( 'xxx:%s' % d.getVar('MACHINE'))
     #bb.note( 'bsa:%s' % bsa)
     csa = d.getVarFlags('ISP_CONFIG')
     for i, v in csa.items():
