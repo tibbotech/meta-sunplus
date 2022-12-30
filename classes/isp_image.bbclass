@@ -89,10 +89,10 @@ IMAGE_CMD_isp () {
     done
     boot_type=$(dv_2_arr $i "${IMG_ISP_T}" " ")
     bbnote "${c} Generating the ISP(${boot_type}) script..."
-    ISPEDIR=${ISPEDIR} ${ISPEDIR}ispe-helpers/genisp.${boot_type}.sh ${ISP_IMG} ${ISP_TMPDIR}/${boot_type}.txt
-    ${ISPEDIR}ispe-helpers/script_enc.sh "ISP Script" ${ISP_TMPDIR}/${boot_type}.txt ${ISP_TMPDIR}/${boot_type}.raw
+    ISPEDIR=${ISPEDIR} ${ISPEDIR}ispe-helpers/genisp.${boot_type}.sh ${ISP_IMG} ${ISP_TMPDIR}/${c}.${boot_type}.txt
+    ${ISPEDIR}ispe-helpers/script_enc.sh "ISP Script" ${ISP_TMPDIR}/${c}.${boot_type}.txt ${ISP_TMPDIR}/${c}.${boot_type}.raw
     bbnote "${c} Installing the ISP(${boot_type}) script..."
-    ${ISPEDIR}ispe ${ISP_IMG} -vv setb eof ${ISP_TMPDIR}/${boot_type}.raw
+    ${ISPEDIR}ispe ${ISP_IMG} -vv setb eof ${ISP_TMPDIR}/${c}.${boot_type}.raw
     bbnote "${c} Checking the offsets..."
     output=$(ispe ${ISP_IMG} list)
     LP=$(echo "${output}" | grep "Last part " | sed -e 's/Last part EOF: 0x//')
@@ -101,9 +101,9 @@ IMAGE_CMD_isp () {
     bbnote "${c} Last part: ${LP}"
     bbnote "${c} Tail data: ${TL}"
     bbnote "${c} Installing the HDR script ${TLh}..."
-    cat ${ISPEDIR}ispe-templates/sp7021.hdr.T | sed -e "s/{T_OFF}/0x${LP}/" -e "s/{T_SIZE}/0x${TLh}/" > ${ISP_TMPDIR}/head.script.txt
-    ${ISPEDIR}ispe-helpers/script_enc.sh "Init ISP Script" ${ISP_TMPDIR}/head.script.txt ${ISP_TMPDIR}/head.script.raw
-    ispe ${ISP_IMG} head sets ${ISP_TMPDIR}/head.script.raw
+    cat ${ISPEDIR}ispe-templates/sp7021.hdr.T | sed -e "s/{T_OFF}/0x${LP}/" -e "s/{T_SIZE}/0x${TLh}/" > ${ISP_TMPDIR}/${c}.head.script.txt
+    ${ISPEDIR}ispe-helpers/script_enc.sh "Init ISP Script" ${ISP_TMPDIR}/${c}.head.script.txt ${ISP_TMPDIR}/${c}.head.script.raw
+    ispe ${ISP_IMG} head sets ${ISP_TMPDIR}/${c}.head.script.raw
     ln -sf ${ISP_IMG} ${DEPLOY_DIR_IMAGE}/${c}/ISPBOOOT.BIN
     i=$(expr $i + 1)
  done
