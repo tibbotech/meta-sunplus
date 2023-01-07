@@ -28,14 +28,13 @@ IMAGE_CMD_isp () {
  ls -1 ${IMGDEPLOYDIR}/
  ISPEDIR=${WORKDIR}/recipe-sysroot-native/usr/bin/
  ISP_TMPDIR="${WORKDIR}/isptmp"
+ rm -rf "${ISP_TMPDIR}"
+ install -d ${ISP_TMPDIR}/
  i=0
  for c in ${ISP_CONFIG}; do
-    rm -rf "${ISP_TMPDIR}"
-    install -d ${ISP_TMPDIR}/
     bbnote "${c} Image [${i}]"
     rm -rf ${IMGDEPLOYDIR}/${c}
     #install -d ${IMGDEPLOYDIR}/${c}/
-    #ISP_IMG="${IMGDEPLOYDIR}/${c}/ISPBOOOT.BIN"
     install -d ${DEPLOY_DIR_IMAGE}/${c}/
     ISP_IMG="${DEPLOY_DIR_IMAGE}/${c}/${IMAGE_NAME}.ISP"
     ispe ${ISP_IMG} crea
