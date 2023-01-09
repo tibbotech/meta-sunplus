@@ -50,7 +50,7 @@ IMAGE_CMD_isp () {
       ff0="${DEPLOY_DIR_IMAGE}/${bf}"
       ff1="${IMGDEPLOYDIR}/${bf}"
       if [ -z "${bf}" ]; then
-        bberror "${c} No file for setb at ${bo}?!"
+        bberror "${c}:setb No file for ${bo}"
       elif [ -f "${bf}" ]; then
         ispe ${ISP_IMG} setb ${bo} ${bf}
       elif [ -f "${ff0}" ]; then
@@ -58,7 +58,7 @@ IMAGE_CMD_isp () {
       elif [ -f "${ff1}" ]; then
         ispe ${ISP_IMG} setb ${bo} ${ff1}
       else
-        bberror "${c} No '${bf}' file found"
+        bberror "${c}:setb '${bf}' not found"
       fi;
       j=$(expr $j + 1)
     done
@@ -75,7 +75,7 @@ IMAGE_CMD_isp () {
       ff0="${DEPLOY_DIR_IMAGE}/${f}"
       ff1="${IMGDEPLOYDIR}/${f}"
       if [ -z "${f}" ]; then
-        bberror "${c} No file for part '${p}'?!"
+        bbwarn "${c}[${p}] No contents"
       elif [ -f "${f}" ]; then
         ispe ${ISP_IMG} part "${p}" file ${f}
       elif [ -f "${ff0}" ]; then
@@ -83,7 +83,7 @@ IMAGE_CMD_isp () {
       elif [ -f "${ff1}" ]; then
         ispe ${ISP_IMG} part "${p}" file ${ff1}
       else
-        bberror "${c} No '${f}' file found"
+        bberror "${c}[${p}] '${f}' not found"
       fi;
       ispe ${ISP_IMG} part "${p}" emmc ${o}
       j=$(expr $j + 1)
