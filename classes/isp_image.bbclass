@@ -5,6 +5,8 @@ inherit image_types
 
 do_image_isp[depends] = "ispe-native:do_populate_sysroot"
 do_image_isp[depends] += "u-boot-tools-native:do_populate_sysroot"
+do_image_isp[depends] += "virtual/bootloader:do_deploy"
+do_image_isp[depends] += "virtual/kernel:do_deploy"
 
 dv_2_arr () {
  i=0
