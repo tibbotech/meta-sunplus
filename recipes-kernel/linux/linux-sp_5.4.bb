@@ -1,6 +1,6 @@
 KBRANCH ?= "v5.4/standard/base"
 
-require recipes-kernel/linux/linux-sp-5.4.inc
+require recipes-kernel/linux/linux-sp-5.x.inc
 
 # board specific branches
 KBRANCH:qemuarm  ?= "v5.4/standard/arm-versatile-926ejs"
