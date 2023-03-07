@@ -28,6 +28,8 @@ include bt/bt.scc
 include spi/sp_nornand.scc
 include spi/sp_spi.scc
 
+include sdio/sdio.scc
+
 # ICM
 #include input/sp_icm.scc
 
