@@ -58,5 +58,3 @@ include features/uio/uio.scc
 #include features/netfilter/netfilter.scc
 
 include sound.scc
-
-include tibbits/all.scc
