@@ -68,6 +68,12 @@ SRC_URI += "file://uart_485/sp_uart.c.sleep1.patch"
 # SPI backport
 #SRC_URI += "file://spi_backport/spi-sunplus-sp7021.c.new.patch"
 
+# ds2430 driver backport from 5.10
+KERNEL_FEATURES:append = " ds2430/ds2430.scc"
+SRC_URI:append:tppg2 = " file://ds2430/Kconfig.ds2430.patch"
+SRC_URI:append:tppg2 = " file://ds2430/Makefile.ds2430.patch"
+SRC_URI:append:tppg2 = " file://ds2430/w1_ds2430.c.patch"
+
 do_deploy:append() {
  dd="${DEPLOYDIR}"
  if [ -n "${KERNEL_DEPLOYSUBDIR}" ]; then

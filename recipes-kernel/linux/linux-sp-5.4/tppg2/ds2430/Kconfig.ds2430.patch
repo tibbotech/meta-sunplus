@@ -1,0 +1,17 @@
+--- a/drivers/w1/slaves/Kconfig	2023-05-30 04:45:06.103162817 +0300
++++ a/drivers/w1/slaves/Kconfig	2023-05-30 15:08:24.055320528 +0300
+@@ -25,6 +25,14 @@
+ 	  This device can also work as a single-channel
+ 	  binary remote sensor.
+ 
++config W1_SLAVE_DS2430
++	tristate "256b EEPROM family support (DS2430)"
++	help
++	  Say Y here if you want to use a 1-wire 256bit EEPROM
++	  family device (DS2430).
++	  This EEPROM is organized as one page of 32 bytes for random
++	  access.
++
+ config W1_SLAVE_DS2408
+ 	tristate "8-Channel Addressable Switch (IO Expander) 0x29 family support (DS2408)"
+ 	help

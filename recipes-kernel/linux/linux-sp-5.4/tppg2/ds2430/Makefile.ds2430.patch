@@ -1,0 +1,10 @@
+--- a/drivers/w1/slaves/Makefile	2023-05-30 04:45:06.103162817 +0300
++++ a/drivers/w1/slaves/Makefile	2023-05-30 15:08:51.937322137 +0300
+@@ -10,6 +10,7 @@
+ obj-$(CONFIG_W1_SLAVE_DS2413)	+= w1_ds2413.o
+ obj-$(CONFIG_W1_SLAVE_DS2406)	+= w1_ds2406.o
+ obj-$(CONFIG_W1_SLAVE_DS2423)	+= w1_ds2423.o
++obj-$(CONFIG_W1_SLAVE_DS2430)	+= w1_ds2430.o
+ obj-$(CONFIG_W1_SLAVE_DS2431)	+= w1_ds2431.o
+ obj-$(CONFIG_W1_SLAVE_DS2805)	+= w1_ds2805.o
+ obj-$(CONFIG_W1_SLAVE_DS2433)	+= w1_ds2433.o
