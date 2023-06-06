@@ -25,10 +25,10 @@ SRCREV_machine:tppg2 = "1cc820c8fb982b0dc359513dc069bba4e097fcd1"
 # 5.4 tibbo/spi_exp2
 SRCREV_machine:tppg2 = "acd013f0a071284c010f25bc71b7b96d042bfcc1"
 # 5.10
-SRCREV_machine:tppg2 = "81f03cbac09004ab788ff0d96dd7cdb4df4d8386"
+SRCREV_machine:tppg2 = "dce567f1625d423253d11560aa4b88da7a6bf15e"
 
 # temporary it is the copy
-SRCREV = "81f03cbac09004ab788ff0d96dd7cdb4df4d8386"
+SRCREV = "dce567f1625d423253d11560aa4b88da7a6bf15e"
 
 # if using meta from master
 #SRCREV_meta ?= "cebe198870d781829bd997a188cc34d9f7a61023"
