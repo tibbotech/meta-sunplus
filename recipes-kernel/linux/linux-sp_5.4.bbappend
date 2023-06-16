@@ -49,16 +49,6 @@ KMETA="kernel-meta"
 #SRC_URI += "file://sdio_dbg/spsdv2.c.err.patch"
 #SRC_URI += "file://sdio_dbg/spsdv2.c.inf.patch"
 
-# tmp: spi debug
-#SRC_URI += "file://dbg_spi/spi-sunplus-sp7021.c.dbg0.patch"
-#SRC_URI += "file://dbg_spi/spi-sunplus-sp7021.c.dbg1.patch"
-#SRC_URI += "file://dbg_spi/spi-sunplus-sp7021.c.norxtxdbg.patch"
-#SRC_URI += "file://dbg_spi/spi-sunplus-sp7021.c.csdbg.patch"
-# test CAN without it
-#SRC_URI += "file://dbg_spi/spi-sunplus-sp7021.c.len.patch"
-
-#SRC_URI += "file://dbg_spi/spi.c.dbg0.patch"
-
 # FB patch
 SRC_URI += "file://video/fb_sp7021_main.c.set.patch"
 
