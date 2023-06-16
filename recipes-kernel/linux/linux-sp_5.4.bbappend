@@ -7,7 +7,6 @@ LINUX_VERSION_EXTENSION ?= "-sp-${LINUX_KERNEL_TYPE}"
 # may be moved to /machine/ config
 KMACHINE = "pentagram"
 
-#KBRANCH:tppg2 = "tibbo/spi256"
 KBRANCH:tppg2 = "kernel_5.4"
 #KBRANCH:tppg2 = "master"
 
@@ -19,10 +18,6 @@ SRC_URI += "file://kmeta;type=kmeta;name=kmeta;destsuffix=kmeta"
 
 # 4.19
 SRCREV_machine:tppg2 = "e81c7196d43ee83e0c05a9ac666cfe7a5fbd2ce9"
-# 5.4 tibbo/spi_exp
-SRCREV_machine:tppg2 = "1cc820c8fb982b0dc359513dc069bba4e097fcd1"
-# 5.4 tibbo/spi_exp2
-SRCREV_machine:tppg2 = "acd013f0a071284c010f25bc71b7b96d042bfcc1"
 # 5.4 master
 SRCREV_machine:tppg2 = "2affe89fb93c9119040ec7415bbf27fc7b2b6958"
 
