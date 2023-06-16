@@ -55,9 +55,6 @@ SRC_URI += "file://video/fb_sp7021_main.c.set.patch"
 # 485 test
 SRC_URI += "file://uart_485/sp_uart.c.sleep1.patch"
 
-# SPI backport
-#SRC_URI += "file://spi_backport/spi-sunplus-sp7021.c.new.patch"
-
 # ds2430 driver backport from 5.10
 KERNEL_FEATURES:append = " ds2430/ds2430.scc"
 

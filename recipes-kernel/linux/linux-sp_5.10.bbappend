@@ -56,9 +56,6 @@ KMETA="kernel-meta"
 # 485 test
 SRC_URI += "file://uart_485/sp_uart.c.sleep1.patch"
 
-# SPI backport
-#SRC_URI += "file://spi_backport/spi-sunplus-sp7021.c.new.patch"
-
 do_deploy:append() {
  dd="${DEPLOYDIR}"
  if [ -n "${KERNEL_DEPLOYSUBDIR}" ]; then
