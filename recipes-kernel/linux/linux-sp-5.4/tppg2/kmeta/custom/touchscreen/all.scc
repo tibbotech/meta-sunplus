@@ -1,2 +1,0 @@
-include features/input/touchscreen.scc
-kconf hardware goodix.cfg
