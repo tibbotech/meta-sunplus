@@ -51,7 +51,7 @@ SRC_URI += "file://video/fb_sp7021_main.c.set.patch"
 SRC_URI += "file://uart_485/sp_uart.c.sleep1.patch"
 
 # ds2430 driver backport from 5.10
-KERNEL_FEATURES:append = " ds2430/ds2430.scc"
+KERNEL_FEATURES:append = " bsp/pentagram/1w/ds2430/ds2430.scc"
 
 do_deploy:append() {
  dd="${DEPLOYDIR}"
