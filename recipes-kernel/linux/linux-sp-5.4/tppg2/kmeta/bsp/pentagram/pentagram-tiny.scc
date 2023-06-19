@@ -7,7 +7,7 @@ branch pentagram
 
 include pentagram.scc
 
-include cfg/systemd_features.scc
+include systemd_features.scc
 # not for tiny (cgroups for limits + process isolation)
 include features/cgroups.scc
 include features/namespaces/namespaces.scc
