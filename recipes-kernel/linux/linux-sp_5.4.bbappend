@@ -82,6 +82,4 @@ do_deploy:append() {
 #KERNEL_CONFIG_COMMAND = "oe_runmake_call -C ${S} O=${B} pentagram_sc7021_achip_emu_defconfig"
 #KERNEL_CONFIG_COMMAND = "oe_runmake_call -C ${S} O=${B} defconfig"
 
-#KERNEL_EXTRA_FEATURES += "features/initramfs/initramfs.scc"
-
 DEPENDS += "isp-native"
