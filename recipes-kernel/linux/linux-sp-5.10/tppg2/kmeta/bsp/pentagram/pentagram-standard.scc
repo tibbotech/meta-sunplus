@@ -5,10 +5,6 @@ define KARCH arm
 include pentagram-tiny.scc
 #include ktypes/standard/standard.scc
 
-# defined in .bbappend
-#include cfg/rpi-ovls/ovls.scc
-#include cfg/rpi-ovls/ovls-4.19.scc
-
 # default policy for standard kernels
 #include features/latencytop/latencytop.scc
 #include features/profiling/profiling.scc
