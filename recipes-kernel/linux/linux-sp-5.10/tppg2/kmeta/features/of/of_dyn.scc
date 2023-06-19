@@ -1,4 +1,0 @@
-define KFEATURE_DESCRIPTION "Enable dynamic OF"
-define KFEATURE_COMPATIBILITY all
-
-kconf non-hardware of_dyn.cfg
