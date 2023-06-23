@@ -71,11 +71,17 @@ IMAGE_CMD_isp () {
       f=$(dv_2_arr $j "$faz" ",")
       o=$(dv_2_arr $j "$oaz" ",")
       bbnote "${c} part:${p} file:${f} off:${o}"
+      if [ "x${p}" == "x-" ]; then
+        j=$(expr $j + 1)
+        continue;
+      fi;
       ispe ${ISP_IMG} part "${p}" addp
       ff0="${DEPLOY_DIR_IMAGE}/${f}"
       ff1="${IMGDEPLOYDIR}/${f}"
       if [ -z "${f}" ]; then
         bbwarn "${c}[${p}] No contents"
+      elif [ "x${f}" == "x-" ]; then
+        bbnote "${c}[${p}] Skipped"
       elif [ -f "${f}" ]; then
         ispe ${ISP_IMG} part "${p}" file ${f}
       elif [ -f "${ff0}" ]; then
@@ -89,6 +95,14 @@ IMAGE_CMD_isp () {
       j=$(expr $j + 1)
     done
     boot_type=$(dv_2_arr $i "${IMG_ISP_T}" " ")
+    bbnote "${c} ISP script type: ${boot_type}"
+    if [ "x${boot_type}" == "xnone" ]; then
+      i=$(expr $i + 1)
+      continue;
+    fi;
+    if [ ! -f "${ISPEDIR}ispe-helpers/genisp.${boot_type}.sh" ]; then
+      bberror "${c}:ISP boot type '${boot_type}' not found"
+    fi;
     bbnote "${c} Generating the ISP(${boot_type}) script..."
     ISPEDIR=${ISPEDIR} ${ISPEDIR}ispe-helpers/genisp.${boot_type}.sh ${ISP_IMG} ${ISP_TMPDIR}/${c}.${boot_type}.txt
     ${ISPEDIR}ispe-helpers/script_enc.sh "ISP Script" ${ISP_TMPDIR}/${c}.${boot_type}.txt ${ISP_TMPDIR}/${c}.${boot_type}.raw
@@ -127,7 +141,7 @@ python () {
         pa1=[]
         pa2=[]
         for vv in v.strip().split(' '):
-            #bb.note( 'vv:%s' % vv)
+            #bb.note( 'vv ISP_CONFIG:%s' % vv)
             da=vv.split(';')
             if len(da) < 3:
                 raise bb.parse.SkipRecipe('Three items should be defined')
@@ -144,7 +158,7 @@ python () {
         ba1=[]
         v=d.getVarFlag('ISP_SETBOO', i)
         for vv in v.strip().split(' '):
-            #bb.note( 'vv:%s' % vv)
+            #bb.note( 'vv ISP_SETBOO:%s' % vv)
             ba=vv.split(';')
             if len(ba) < 2:
                 raise bb.parse.SkipRecipe('Two items should be defined')
