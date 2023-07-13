@@ -8,14 +8,29 @@ do_image_isp[depends] += "u-boot-tools-native:do_populate_sysroot"
 do_image_isp[depends] += "virtual/bootloader:do_deploy"
 do_image_isp[depends] += "virtual/kernel:do_deploy"
 
+#dv_2_arr () {
+# i=0
+# IFS="${3}"
+# for p in ${2}; do
+#   if [ $i -eq $1 ]; then  echo "$p";  fi;
+#   i=$(expr $i + 1)
+# done
+# echo ""
+#}
+
 dv_2_arr () {
  i=0
+ o_IFS="${IFS}"
  IFS="${3}"
- for p in ${2}; do
+ read -ra XXX << EOF
+$2
+EOF
+ for p in ${XXX[@]}; do
    if [ $i -eq $1 ]; then  echo "$p";  fi;
    i=$(expr $i + 1)
  done
  echo ""
+ IFS="${o_IFS}"
 }
 
 IMAGE_CMD_isp () {
@@ -24,7 +39,6 @@ IMAGE_CMD_isp () {
  bbnote "isp IMAGE_NAME_SUFFIX:${IMAGE_NAME_SUFFIX}"
  bbnote "isp IMAGE_ROOTFS:${IMAGE_ROOTFS}"
  bbnote "isp ISP_CONFIG:${ISP_CONFIG}"
- bbnote "isp IMG_ISP_P:${IMG_ISP_P}"
  bbnote "isp WORKDIR:${WORKDIR}"
  bbnote "isp DEPLOY_DIR_IMAGE:${DEPLOY_DIR_IMAGE}"
  ls -1 ${IMGDEPLOYDIR}/
@@ -40,28 +54,34 @@ IMAGE_CMD_isp () {
     install -d ${DEPLOY_DIR_IMAGE}/${c}/
     ISP_IMG="${DEPLOY_DIR_IMAGE}/${c}/${IMAGE_NAME}.ISP"
     ispe ${ISP_IMG} crea
-    bfz=$(dv_2_arr $i "${IMG_ISP_BF}" " ")
-    boz=$(dv_2_arr $i "${IMG_ISP_BO}" " ")
+
+    iinc=$(expr $i + 1)
+
+    # ISP_SETBOO_* handling _K is file, _V is offset
+    ka=$(dv_2_arr $iinc "${IMG_ISP_SETBOO_K}" "|")
+    va=$(dv_2_arr $iinc "${IMG_ISP_SETBOO_V}" "|")
     IFS=","
     j=0
-    for bf in $bfz; do
-      bo=$(dv_2_arr $j "$boz" ",")
-      bbnote "${c} setb file:${bf} off:${bo}"
-      ff0="${DEPLOY_DIR_IMAGE}/${bf}"
-      ff1="${IMGDEPLOYDIR}/${bf}"
-      if [ -z "${bf}" ]; then
-        bberror "${c}:setb No file for ${bo}"
-      elif [ -f "${bf}" ]; then
-        ispe ${ISP_IMG} setb ${bo} ${bf}
+    for f in $ka; do
+      v=$(dv_2_arr $j "$va" ",")
+      bbnote "${c} SETBOO file:${f} off:${v}"
+      ff0="${DEPLOY_DIR_IMAGE}/${f}"
+      ff1="${IMGDEPLOYDIR}/${f}"
+      if [ -z "${f}" ]; then
+        bberror "${c}:setb No file for ${v}"
+      elif [ -f "${f}" ]; then
+        ispe ${ISP_IMG} setb ${v} ${f}
       elif [ -f "${ff0}" ]; then
-        ispe ${ISP_IMG} setb ${bo} ${ff0}
+        ispe ${ISP_IMG} setb ${v} ${ff0}
       elif [ -f "${ff1}" ]; then
-        ispe ${ISP_IMG} setb ${bo} ${ff1}
+        ispe ${ISP_IMG} setb ${v} ${ff1}
       else
         bberror "${c}:setb '${bf}' not found"
       fi;
       j=$(expr $j + 1)
     done
+
+    # ISP_ISP_* handling _P is partition name, _F is the file, _O is EMMC offset (optional)
     paz=$(dv_2_arr $i "${IMG_ISP_P}" " ")
     faz=$(dv_2_arr $i "${IMG_ISP_F}" " ")
     oaz=$(dv_2_arr $i "${IMG_ISP_O}" " ")
@@ -70,7 +90,7 @@ IMAGE_CMD_isp () {
     for p in $paz; do
       f=$(dv_2_arr $j "$faz" ",")
       o=$(dv_2_arr $j "$oaz" ",")
-      bbnote "${c} part:${p} file:${f} off:${o}"
+      bbnote "${c} CONFIG ${p} file:${f} off:${o}"
       if [ "x${p}" == "x-" ]; then
         j=$(expr $j + 1)
         continue;
@@ -94,7 +114,46 @@ IMAGE_CMD_isp () {
       ispe ${ISP_IMG} part "${p}" emmc ${o}
       j=$(expr $j + 1)
     done
-    boot_type=$(dv_2_arr $i "${IMG_ISP_T}" " ")
+
+    # ISP_PFLAGS_* handling _K is parts, _V is flag value
+    ka=$(dv_2_arr $iinc "${IMG_ISP_PFLAGS_K}" "|")
+    va=$(dv_2_arr $iinc "${IMG_ISP_PFLAGS_V}" "|")
+# bbnote "${c} IMG_ISP_PFLAGS_K:${IMG_ISP_PFLAGS_K}"
+# bbnote "${c} ka:${ka}"
+    IFS=","
+    j=0
+    for p in $ka; do
+      v=$(dv_2_arr $j "$va" ",")
+      bbnote "${c} PFLAGS ${p} flag:${v}"
+      ispe ${ISP_IMG} part "${p}" flag ${v}
+      j=$(expr $j + 1)
+    done
+
+    # ISP_NANDOF_* handling _K is parts, _V is offset value
+    ka=$(dv_2_arr $iinc "${IMG_ISP_NANDOF_K}" "|")
+    va=$(dv_2_arr $iinc "${IMG_ISP_NANDOF_V}" "|")
+    IFS=","
+    j=0
+    for p in $ka; do
+      v=$(dv_2_arr $j "$va" ",")
+      bbnote "${c} NANDOF ${p} off:${v}"
+      ispe ${ISP_IMG} part "${p}" nand ${v}
+      j=$(expr $j + 1)
+    done
+
+    # ISP_EMMCOF_* handling _K is parts, _V is offset value
+    ka=$(dv_2_arr $iinc "${IMG_ISP_EMMCOF_K}" "|")
+    va=$(dv_2_arr $iinc "${IMG_ISP_EMMCOF_V}" "|")
+    IFS=","
+    j=0
+    for p in $ka; do
+      v=$(dv_2_arr $j "$va" ",")
+      bbnote "${c} EMMCOF ${p} off:${v}"
+      ispe ${ISP_IMG} part "${p}" emmc ${v}
+      j=$(expr $j + 1)
+    done
+
+    boot_type=$(dv_2_arr $i "${IMG_ISP_BOOTYP}" " ")
     bbnote "${c} ISP script type: ${boot_type}"
     if [ "x${boot_type}" == "xnone" ]; then
       i=$(expr $i + 1)
@@ -124,16 +183,11 @@ IMAGE_CMD_isp () {
  done
 }
 
-
 python () {
-    bsa = d.getVarFlags('ISP_SETBOO')
-    tsa = d.getVarFlags('ISP_BOOTYP')
     #bb.note( 'xxx:%s' % d.getVar('MACHINE'))
-    #bb.note( 'bsa:%s' % bsa)
     csa = d.getVarFlags('ISP_CONFIG')
     for i, v in csa.items():
         #bb.note( 'i:%s' % i)
-        #bb.note( 'bsa: %s' % d.getVarFlag('ISP_SETBOO', i))
         d.appendVar('IMG_ISP_P', ' ')
         d.appendVar('IMG_ISP_F', ' ')
         d.appendVar('IMG_ISP_O', ' ')
@@ -143,35 +197,97 @@ python () {
         for vv in v.strip().split(' '):
             #bb.note( 'vv ISP_CONFIG:%s' % vv)
             da=vv.split(';')
-            if len(da) < 3:
-                raise bb.parse.SkipRecipe('Three items should be defined')
+            if len(da) < 2:
+                raise bb.parse.SkipRecipe('ISP_CONFIG[%s]: At least 2 items should be defined in %s' % (i, vv))
             pa0.append(da[0])
             pa1.append(da[1])
-            pa2.append(da[2])
+            if len(da) > 2:
+                pa2.append(da[2])
+            else:
+                pa2.append('0x0')
         d.appendVar('IMG_ISP_P', ','.join(pa0))
         d.appendVar('IMG_ISP_F', ','.join(pa1))
         d.appendVar('IMG_ISP_O', ','.join(pa2))
-        # do same for SETb
-        d.appendVar('IMG_ISP_BF', ' ')
-        d.appendVar('IMG_ISP_BO', ' ')
-        ba0=[]
-        ba1=[]
-        v=d.getVarFlag('ISP_SETBOO', i)
-        for vv in v.strip().split(' '):
-            #bb.note( 'vv ISP_SETBOO:%s' % vv)
-            ba=vv.split(';')
-            if len(ba) < 2:
-                raise bb.parse.SkipRecipe('Two items should be defined')
-            ba0.append(ba[0])
-            ba1.append(ba[1])
-        d.appendVar('IMG_ISP_BF', ','.join(ba0))
-        d.appendVar('IMG_ISP_BO', ','.join(ba1))
-        # same for ISP_BOOTYP
-        d.appendVar('IMG_ISP_T', ' ')
+
+    for i, v in csa.items():
+        # *** handle ISP_BOOTYP
+        d.appendVar('IMG_ISP_BOOTYP', ' ')
         v=d.getVarFlag('ISP_BOOTYP', i)
         if v == "":
             v = "emmc"
-        d.appendVar('IMG_ISP_T', v)
+        d.appendVar('IMG_ISP_BOOTYP', v)
+
+    for i, v in csa.items():
+        # *** handle ISP_PFLAGS
+        d.appendVar('IMG_ISP_PFLAGS_K', '|')
+        d.appendVar('IMG_ISP_PFLAGS_V', '|')
+        ba0=[]
+        ba1=[]
+        v=d.getVarFlag('ISP_PFLAGS', i)
+        if v is None:
+            continue
+        for vv in v.strip().split(' '):
+            ba=vv.split(';')
+            if len(ba) < 2:
+                raise bb.parse.SkipRecipe('ISP_PFLAGST[%s]: two items should be defined in %s' % (i, vv))
+            ba0.append(ba[0])
+            ba1.append(ba[1])
+        d.appendVar('IMG_ISP_PFLAGS_K', ','.join(ba0))
+        d.appendVar('IMG_ISP_PFLAGS_V', ','.join(ba1))
+
+    for i, v in csa.items():
+        # *** handle ISP_NANDOF
+        d.appendVar('IMG_ISP_NANDOF_K', '|')
+        d.appendVar('IMG_ISP_NANDOF_V', '|')
+        ba0=[]
+        ba1=[]
+        v=d.getVarFlag('ISP_NANDOF', i)
+        if v is None:
+            continue
+        for vv in v.strip().split(' '):
+            ba=vv.split(';')
+            if len(ba) < 2:
+                raise bb.parse.SkipRecipe('ISP_NANDOF[%s]: two items should be defined in %s' % (i, vv))
+            ba0.append(ba[0])
+            ba1.append(ba[1])
+        d.appendVar('IMG_ISP_NANDOF_K', ','.join(ba0))
+        d.appendVar('IMG_ISP_NANDOF_V', ','.join(ba1))
+
+    for i, v in csa.items():
+        # *** handle ISP_EMMCOF
+        d.appendVar('IMG_ISP_EMMCOF_K', '|')
+        d.appendVar('IMG_ISP_EMMCOF_V', '|')
+        ba0=[]
+        ba1=[]
+        v=d.getVarFlag('ISP_EMMCOF', i)
+        if v is None:
+            continue
+        for vv in v.strip().split(' '):
+            ba=vv.split(';')
+            if len(ba) < 2:
+                raise bb.parse.SkipRecipe('ISP_EMMCOF[%s]: two items should be defined in %s' % (i, vv))
+            ba0.append(ba[0])
+            ba1.append(ba[1])
+        d.appendVar('IMG_ISP_EMMCOF_K', ','.join(ba0))
+        d.appendVar('IMG_ISP_EMMCOF_V', ','.join(ba1))
+
+    for i, v in csa.items():
+        # *** handle ISP_SETBOO
+        d.appendVar('IMG_ISP_SETBOO_K', '|')
+        d.appendVar('IMG_ISP_SETBOO_V', '|')
+        ba0=[]
+        ba1=[]
+        v=d.getVarFlag('ISP_SETBOO', i)
+        if v is None:
+            continue
+        for vv in v.strip().split(' '):
+            ba=vv.split(';')
+            if len(ba) < 2:
+                raise bb.parse.SkipRecipe('ISP_SETBOO[%s]: two items should be defined in %s' % (i, vv))
+            ba0.append(ba[0])
+            ba1.append(ba[1])
+        d.appendVar('IMG_ISP_SETBOO_K', ','.join(ba0))
+        d.appendVar('IMG_ISP_SETBOO_V', ','.join(ba1))
             
     #bb.note('xxxxx')
 }
