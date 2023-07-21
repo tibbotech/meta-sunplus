@@ -91,7 +91,7 @@ IMAGE_CMD_isp () {
       f=$(dv_2_arr $j "$faz" ",")
       o=$(dv_2_arr $j "$oaz" ",")
       bbnote "${c} CONFIG ${p} file:${f} off:${o}"
-      if [ "x${p}" == "x-" ]; then
+      if [ "x${p}" = "x-" ]; then
         j=$(expr $j + 1)
         continue;
       fi;
@@ -100,7 +100,7 @@ IMAGE_CMD_isp () {
       ff1="${IMGDEPLOYDIR}/${f}"
       if [ -z "${f}" ]; then
         bbwarn "${c}[${p}] No contents"
-      elif [ "x${f}" == "x-" ]; then
+      elif [ "x${f}" = "x-" ]; then
         bbnote "${c}[${p}] Skipped"
       elif [ -f "${f}" ]; then
         ispe ${ISP_IMG} part "${p}" file ${f}
@@ -155,7 +155,7 @@ IMAGE_CMD_isp () {
 
     boot_type=$(dv_2_arr $i "${IMG_ISP_BOOTYP}" " ")
     bbnote "${c} ISP script type: ${boot_type}"
-    if [ "x${boot_type}" == "xnone" ]; then
+    if [ "x${boot_type}" = "xnone" ]; then
       i=$(expr $i + 1)
       continue;
     fi;
