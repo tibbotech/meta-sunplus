@@ -8,30 +8,30 @@ do_image_isp[depends] += "u-boot-tools-native:do_populate_sysroot"
 do_image_isp[depends] += "virtual/bootloader:do_deploy"
 do_image_isp[depends] += "virtual/kernel:do_deploy"
 
-#dv_2_arr () {
-# i=0
-# IFS="${3}"
-# for p in ${2}; do
-#   if [ $i -eq $1 ]; then  echo "$p";  fi;
-#   i=$(expr $i + 1)
-# done
-# echo ""
-#}
-
 dv_2_arr () {
  i=0
- o_IFS="${IFS}"
  IFS="${3}"
- read -ra XXX << EOF
-$2
-EOF
- for p in ${XXX[@]}; do
+ for p in ${2}; do
    if [ $i -eq $1 ]; then  echo "$p";  fi;
    i=$(expr $i + 1)
  done
  echo ""
- IFS="${o_IFS}"
 }
+
+#dv_2_arr () {
+# i=0
+# o_IFS="${IFS}"
+# IFS="${3}"
+# read -ra XXX << EOF
+#$2
+#EOF
+# for p in ${XXX[@]}; do
+#   if [ $i -eq $1 ]; then  echo "$p";  fi;
+#   i=$(expr $i + 1)
+# done
+# echo ""
+# IFS="${o_IFS}"
+#}
 
 IMAGE_CMD_isp () {
  bbnote "isp IMGDEPLOYDIR:${IMGDEPLOYDIR}"
