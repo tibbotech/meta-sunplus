@@ -18,21 +18,6 @@ dv_2_arr () {
  echo ""
 }
 
-#dv_2_arr () {
-# i=0
-# o_IFS="${IFS}"
-# IFS="${3}"
-# read -ra XXX << EOF
-#$2
-#EOF
-# for p in ${XXX[@]}; do
-#   if [ $i -eq $1 ]; then  echo "$p";  fi;
-#   i=$(expr $i + 1)
-# done
-# echo ""
-# IFS="${o_IFS}"
-#}
-
 IMAGE_CMD_isp () {
  bbnote "isp IMGDEPLOYDIR:${IMGDEPLOYDIR}"
  bbnote "isp IMAGE_NAME:${IMAGE_NAME}"
