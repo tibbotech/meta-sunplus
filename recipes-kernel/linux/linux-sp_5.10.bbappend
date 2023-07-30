@@ -2,6 +2,8 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/linux-sp-5.10:"
 
 SUMMARY = "Linux kernel (SunPlus,pub)"
 
+COMPATIBLE_MACHINE = "sp7021"
+
 LINUX_VERSION = "5.10.59"
 LINUX_VERSION_EXTENSION ?= "-sp-${LINUX_KERNEL_TYPE}"
 
