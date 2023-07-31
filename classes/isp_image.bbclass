@@ -10,12 +10,14 @@ do_image_isp[depends] += "virtual/kernel:do_deploy"
 
 dv_2_arr () {
  i=0
+ o_IFS="${IFS}"
  IFS="${3}"
  for p in ${2}; do
    if [ $i -eq $1 ]; then  echo "$p";  fi;
    i=$(expr $i + 1)
  done
  echo ""
+ IFS="${o_IFS}"
 }
 
 IMAGE_CMD_isp () {
