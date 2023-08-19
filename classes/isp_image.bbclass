@@ -20,7 +20,7 @@ dv_2_arr () {
  IFS="${o_IFS}"
 }
 
-IMAGE_CMD_isp () {
+IMAGE_CMD:isp () {
  bbnote "isp IMGDEPLOYDIR:${IMGDEPLOYDIR}"
  bbnote "isp IMAGE_NAME:${IMAGE_NAME}"
  bbnote "isp IMAGE_NAME_SUFFIX:${IMAGE_NAME_SUFFIX}"
