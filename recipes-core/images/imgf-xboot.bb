@@ -42,4 +42,4 @@ DEPENDS += "xboot-emmc-us"
 DEPENDS += "xboot-emmc-sd"
 DEPENDS += "bnoos"
 
-TOOLCHAIN_TARGET_TASK:append += "${@bb.utils.contains("DISTRO_FEATURES", "openamp", "libmetal open-amp", "",d)}"
+TOOLCHAIN_TARGET_TASK:append = " ${@bb.utils.contains("DISTRO_FEATURES", "openamp", "libmetal open-amp", "",d)}"
