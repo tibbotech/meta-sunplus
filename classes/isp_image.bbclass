@@ -1,8 +1,5 @@
 inherit image_types
 
-# defined in the machine config
-#IMAGE_TYPEDEP_isp = "ext4"
-
 do_image_isp[depends]  = "ispe-native:do_populate_sysroot"
 do_image_isp[depends] += "u-boot-tools-native:do_populate_sysroot"
 do_image_isp[depends] += "virtual/bootloader:do_deploy"
