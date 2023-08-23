@@ -4,6 +4,7 @@ SECTION = "bootloaders"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_HOST = "(arm).*-linux"
+COMPATIBLE_MACHINE = "(sp7021-arm5)"
 
 SRC_URI += "file://Makefile.autoc.patch"
 

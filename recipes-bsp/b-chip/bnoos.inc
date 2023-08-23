@@ -3,6 +3,7 @@ SUMMARY = "B-chip (arm926) nonos demo"
 HOMEPAGE = "https://www.sunplus.com/"
 SECTION = "devel"
 LICENSE = "GPLv3+"
+COMPATIBLE_MACHINE = "(sp7021)"
 
 S = "${WORKDIR}/git"
 
