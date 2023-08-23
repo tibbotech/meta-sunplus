@@ -2,7 +2,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/linux-sp-5.10:"
 
 SUMMARY = "Linux kernel (SunPlus,pub)"
 
-COMPATIBLE_MACHINE = "sp7021"
+COMPATIBLE_MACHINE = "(sp7021|sp7021-arm5)"
 
 LINUX_VERSION = "5.10.59"
 LINUX_VERSION_EXTENSION ?= "-sp-${LINUX_KERNEL_TYPE}"
@@ -10,8 +10,8 @@ LINUX_VERSION_EXTENSION ?= "-sp-${LINUX_KERNEL_TYPE}"
 # may be moved to /machine/ config
 KMACHINE = "pentagram"
 
-KBRANCH:tppg2 = "kernel_5.10"
-#KBRANCH:tppg2 = "master"
+#KBRANCH:tppg2 = "kernel_5.10"
+KBRANCH = "kernel_5.10"
 
 #SRC_URI = "git://git@113.196.136.131:22/qac628/linux/kernel;protocol=ssh;name=machine;branch=${KBRANCH}"
 SRC_URI = "git://github.com/tibbotech/plus1_kernel.git;protocol=https;branch=${KBRANCH}"
@@ -20,9 +20,11 @@ SRC_URI += "file://kmeta;type=kmeta;name=kmeta;destsuffix=kmeta"
 #SRC_URI += "git://git.yoctoproject.org/yocto-kernel-cache;type=kmeta;name=meta;branch=yocto-4.19;destsuffix=${KMETA}"
 
 # 4.19
-SRCREV_machine:tppg2 = "e81c7196d43ee83e0c05a9ac666cfe7a5fbd2ce9"
+#SRCREV_machine:tppg2 = "e81c7196d43ee83e0c05a9ac666cfe7a5fbd2ce9"
+SRCREV_machine = "e81c7196d43ee83e0c05a9ac666cfe7a5fbd2ce9"
 # 5.10
-SRCREV_machine:tppg2 = "dce567f1625d423253d11560aa4b88da7a6bf15e"
+#SRCREV_machine:tppg2 = "dce567f1625d423253d11560aa4b88da7a6bf15e"
+SRCREV_machine = "dce567f1625d423253d11560aa4b88da7a6bf15e"
 
 # temporary it is the copy
 SRCREV = "dce567f1625d423253d11560aa4b88da7a6bf15e"
