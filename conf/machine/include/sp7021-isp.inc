@@ -56,7 +56,7 @@ IMAGE_BOOT_FILES += "sp7021-ltpp3g2-empty.dtb;dtb"
 IMAGE_CLASSES += "isp_image"
 IMAGE_FSTYPES += "isp"
 
-IMAGE_TYPEDEP_isp += "ext4"
+IMAGE_TYPEDEP:isp += "ext4"
 
 # ISPBOOOT.BIN for EMMC
 ISP_CONFIG += "emmc0"
@@ -91,7 +91,7 @@ ISP_BOOTYP[sdboo] = "none"
 ISP_CONFIG[sdboo] += "part0;-;-"
 ISP_SETBOO[sdboo] += "../${SOC_B}/xboot-emmc.img;0x0"
 
-IMAGE_TYPEDEP_isp += "ubi"
+IMAGE_TYPEDEP:isp += "ubi"
 
 # ISPBOOOT.BIN for NAND
 ISP_CONFIG += "nand0"
