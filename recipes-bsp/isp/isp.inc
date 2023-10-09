@@ -2,7 +2,7 @@ DESCRIPTION = "SunPlus native image build scripts"
 SUMMARY = "SP Image scripts"
 HOMEPAGE = "https://www.sunplus.com/"
 SECTION = "devel"
-LICENSE = "GPLv3+"
+LICENSE = "GPL-3.0-or-later"
 
 S = "${WORKDIR}/git"
 

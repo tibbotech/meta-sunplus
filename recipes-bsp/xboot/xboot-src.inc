@@ -1,7 +1,7 @@
 
 HOMEPAGE = "https://www.sunplus.com/"
 SECTION = "bootloaders"
-LICENSE = "GPLv3+"
+LICENSE = "GPL-3.0-or-later"
 
 SRCREV_draminit = "9f94d93c2c739f3a78dfd44339b5284e39ccf401"
 SRCREV_xboot = "8c36569de26a7b6180e51caff315c458e241c648"

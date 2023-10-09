@@ -2,7 +2,7 @@ DESCRIPTION = "ISP (ISPBOOOT.BIN) Image Editor"
 SUMMARY = "ISPEditor"
 HOMEPAGE = "https://www.tibbo.com/"
 SECTION = "devel"
-LICENSE = "GPLv3+"
+LICENSE = "GPL-3.0-or-later"
 
 inherit deploy autotools autotools-brokensep
 

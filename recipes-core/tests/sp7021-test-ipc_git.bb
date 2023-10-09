@@ -1,7 +1,7 @@
 DESCRIPTION = "SP7021 kernel Inter Processor Communication mailbox test"
 HOMEPAGE = "https://www.sunplus.com/"
 MAINTAINER = "Dmitry Dvorkin <dvorkin@tibbo.com>"
-LICENSE = "LGPLv2+"
+LICENSE = "GPL-3.0-or-later"
 SECTION = "console/utils"
 PACKAGES = "${PN}-dbg ${PN}"
 SRCREV="${AUTOREV}"

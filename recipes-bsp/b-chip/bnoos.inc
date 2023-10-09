@@ -2,7 +2,7 @@ DESCRIPTION = "SunPlus B-chip (arm926, peripherial) nonos demo"
 SUMMARY = "B-chip (arm926) nonos demo"
 HOMEPAGE = "https://www.sunplus.com/"
 SECTION = "devel"
-LICENSE = "GPLv3+"
+LICENSE = "GPL-3.0-or-later"
 COMPATIBLE_MACHINE = "(sp7021)"
 
 S = "${WORKDIR}/git"
