@@ -109,7 +109,7 @@ ISP_CONFIG[nand0] += "env_redund;"
 ISP_CONFIG[nand0] += "nonos;../${SOC_B}/a926-empty.img"
 ISP_CONFIG[nand0] += "dtb;${ISP_VAR_DTB}"
 ISP_CONFIG[nand0] += "kernel;${KERNEL_IMAGETYPE}-initramfs-${MACHINE}.img"
-ISP_CONFIG[nand0] += "rootfs;${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.ubi"
+ISP_CONFIG[nand0] += "rootfs;${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.ubifs"
 
 ISP_PFLAGS[nand0] += "xboot1;0x5"
 ISP_PFLAGS[nand0] += "uboot1;0x5"
