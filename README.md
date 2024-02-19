@@ -23,6 +23,14 @@ Contains:
 
 TBD
 
+## Notes
+
+set 
+```
+PREFERRED_VERSION_linux-sp = "5.10%"
+```
+for >=Nanbield
+
 ## Maintainers
 
 * Dvorkin Dmitry `<dvorkin at tibbo.com>`
