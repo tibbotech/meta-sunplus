@@ -25,11 +25,17 @@ TBD
 
 ## Notes
 
-set 
+For >= Nanbield:
 ```
 PREFERRED_VERSION_linux-sp = "5.10%"
 ```
-for >=Nanbield
+in any child layer.
+
+See "Yocto branch:" comments at
+```
+conf/machine/sp7021-arm5.conf
+conf/machine/sp7021.conf
+```
 
 ## Maintainers
 
