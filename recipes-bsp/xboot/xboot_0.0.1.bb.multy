@@ -64,7 +64,7 @@ do_compile() {
  oe_runmake PLATFORM=${XBOOT_CONFIG}
 }
 
-do_compile_append() {
+do_compile:append() {
  x="${@exp_Ka(d)}"
  y="${@exp_Va(d)}"
  unset i j
@@ -102,9 +102,9 @@ do_deploy() {
 
 #TCLIBC = "musl"
 
-FILES_${PN} += "xboot.bin"
-FILES_${PN} += "add_xhdr.sh"
-FILES_${PN} += "tcpsum"
+FILES:${PN} += "xboot.bin"
+FILES:${PN} += "add_xhdr.sh"
+FILES:${PN} += "tcpsum"
 
 LICENSE = "GPL-3.0-or-later"
 LIC_FILES_CHKSUM = "file://${FILESDIR_sunplus}/common-licenses/GPL-3.0-or-later;md5=1c76c4cc354acaac30ed4d5eefea7245"
