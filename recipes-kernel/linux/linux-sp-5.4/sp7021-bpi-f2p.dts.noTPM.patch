@@ -1,0 +1,11 @@
+--- a/arch/arm/boot/dts/sp7021-bpi-f2p.dts	2024-05-21 15:03:41.963986023 +0300
++++ a/arch/arm/boot/dts/sp7021-bpi-f2p.dts	2024-07-01 16:55:06.032077591 +0300
+@@ -84,7 +84,7 @@
+ 	st33htpi: st33htpi@2e {
+ 		compatible = "st,st33htpm-i2c";
+ 		reg = <0x2e>;
+-		status = "okay";
++		status = "disabled";
+ 	};
+ };
+ 
