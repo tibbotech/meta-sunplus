@@ -43,6 +43,7 @@ IMAGE_BOOT_FILES  = "${WKS_UBOOT};u-boot.img"
 IMAGE_BOOT_FILES += "sdcard_uEnv.txt;uEnv.txt"
 #IMAGE_BOOT_FILES += "a926.img"
 IMAGE_BOOT_FILES += "${KERNEL_IMAGETYPE}-initramfs-${MACHINE}.img;${KERNEL_IMAGETYPE}"
+IMAGE_BOOT_FILES += "${KERNEL_IMAGETYPE}-${MACHINE}.img;${KERNEL_IMAGETYPE}-noinitrd"
 #IMAGE_BOOT_FILES += "ISPBOOOT.BIN"
 # move this
 IMAGE_BOOT_FILES += "sp7021-ltpp3g2-empty.dtb;dtb"
@@ -51,12 +52,14 @@ IMAGE_BOOT_FILES += "sp7021-ltpp3g2-empty.dtb;dtb"
 IMAGE_CLASSES += "isp_image"
 IMAGE_FSTYPES += "isp"
 
+ISP_DEF_HDR="sp7021"
+
 IMAGE_TYPEDEP:isp += "ext4"
 
 # ISPBOOOT.BIN for EMMC
 ISP_CONFIG += "emmc0"
 
-ISP_BOOTYP[emmc0] = "emmc"
+ISP_BOOTYP[emmc0] = "${ISP_DEF_HDR}:emmc"
 
 ISP_SETBOO[emmc0] += "../${SOC_B}/${ISP_EMMC0_XBOOT};0x0"
 ISP_SETBOO[emmc0] += "${ISP_EMMC0_UBOOT};0x10000"
@@ -91,7 +94,7 @@ IMAGE_TYPEDEP:isp += "ubi"
 # ISPBOOOT.BIN for NAND
 ISP_CONFIG += "nand0"
 
-ISP_BOOTYP[nand0] = "nand"
+ISP_BOOTYP[nand0] = "${ISP_DEF_HDR}:nand"
 
 ISP_SETBOO[nand0] += "../${SOC_B}/${ISP_NAND0_XBOOT};0x0"
 ISP_SETBOO[nand0] += "${ISP_NAND0_UBOOT};0x10000"
@@ -116,3 +119,16 @@ ISP_NANDOF[nand0] += "nonos;0x100000"
 ISP_NANDOF[nand0] += "dtb;0x200000"
 ISP_NANDOF[nand0] += "kernel;0x240000"
 ISP_NANDOF[nand0] += "rootfs;0x2240000"
+
+# ISPBOOOT.BIN for IFWIC (depends on jumper: SD or USB)
+# it reads dtb and kernel from part1 (FAT32) and boots with rootfs= part2
+# this ISPBOOT.BIN should be copied into p1 manually after writing the WIC
+#
+ISP_CONFIG += "ifwic"
+
+ISP_BOOTYP[ifwic] = "sp7021-ifwic-direct"
+
+ISP_SETBOO[ifwic] += "../${SOC_B}/${ISP_EMMC0_XBOOT};0x0"
+ISP_SETBOO[ifwic] += "${ISP_EMMC0_UBOOT};0x10000"
+
+ISP_CONFIG[ifwic] += "part0;-;-"

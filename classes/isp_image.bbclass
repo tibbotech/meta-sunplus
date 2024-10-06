@@ -143,23 +143,34 @@ IMAGE_CMD:isp () {
       i=$(expr $i + 1)
       continue;
     fi;
-    if [ ! -f "${ISPEDIR}ispe-helpers/genisp.${boot_type}.sh" ]; then
-      bberror "${c}:ISP boot type '${boot_type}' not found"
+    boot_hdr=$(dv_2_arr 0 "${boot_type}" ":")
+    boot_ext=$(dv_2_arr 1 "${boot_type}" ":")
+    bbnote "${c} bootype HDR(${boot_type})[0]:${boot_hdr}"
+    bbnote "${c} bootype EXT(${boot_type})[1]:${boot_ext}"
+
+    if [ ! -f "${ISPEDIR}ispe-templates/${boot_hdr}.hdr.T" ]; then
+      bberror "${c}:ISP boot HDR '${boot_hdr}' not found"
     fi;
-    bbnote "${c} Generating the ISP(${boot_type}) script..."
-    ISPEDIR=${ISPEDIR} ${ISPEDIR}ispe-helpers/genisp.${boot_type}.sh ${ISP_IMG} ${ISP_TMPDIR}/${c}.${boot_type}.txt
-    ${ISPEDIR}ispe-helpers/script_enc.sh "ISP Script" ${ISP_TMPDIR}/${c}.${boot_type}.txt ${ISP_TMPDIR}/${c}.${boot_type}.raw
-    bbnote "${c} Installing the ISP(${boot_type}) script..."
-    ${ISPEDIR}ispe ${ISP_IMG} -vv setb eof ${ISP_TMPDIR}/${c}.${boot_type}.raw
-    bbnote "${c} Checking the offsets..."
-    output=$(ispe ${ISP_IMG} list)
-    LP=$(echo "${output}" | grep "Last part " | sed -e 's/Last part EOF: 0x//')
-    TL=$(echo "${output}" | grep "Tail data " | sed -e 's/Tail data len: //')
-    TLh=$(printf '%x' $TL)
-    bbnote "${c} Last part: ${LP}"
-    bbnote "${c} Tail data: ${TL}"
+    if [ ! -z "${boot_ext}" ] && [ ! -f "${ISPEDIR}ispe-helpers/genisp.${boot_ext}.sh" ]; then
+      bberror "${c}:ISP boot EXT '${boot_ext}' not found"
+    fi;
+
+    if [ ! -z "${boot_ext}" ]; then
+      bbnote "${c} Generating the ISP(${boot_ext}) script..."
+      ISPEDIR=${ISPEDIR} ${ISPEDIR}ispe-helpers/genisp.${boot_ext}.sh ${ISP_IMG} ${ISP_TMPDIR}/${c}.${boot_ext}.txt
+      ${ISPEDIR}ispe-helpers/script_enc.sh "ISP Script" ${ISP_TMPDIR}/${c}.${boot_ext}.txt ${ISP_TMPDIR}/${c}.${boot_ext}.raw
+      bbnote "${c} Installing the ISP(${boot_ext}) script..."
+      ${ISPEDIR}ispe ${ISP_IMG} -vv setb eof ${ISP_TMPDIR}/${c}.${boot_ext}.raw
+      bbnote "${c} Checking the offsets..."
+      output=$(ispe ${ISP_IMG} list)
+      LP=$(echo "${output}" | grep "Last part " | sed -e 's/Last part EOF: 0x//')
+      TL=$(echo "${output}" | grep "Tail data " | sed -e 's/Tail data len: //')
+      TLh=$(printf '%x' $TL)
+      bbnote "${c} Last part: ${LP}"
+      bbnote "${c} Tail data: ${TL}"
+    fi;
     bbnote "${c} Installing the HDR script ${TLh}..."
-    cat ${ISPEDIR}ispe-templates/sp7021.hdr.T | sed -e "s/{T_OFF}/0x${LP}/" -e "s/{T_SIZE}/0x${TLh}/" > ${ISP_TMPDIR}/${c}.head.script.txt
+    cat ${ISPEDIR}ispe-templates/${boot_hdr}.hdr.T | sed -e "s/{T_OFF}/0x${LP}/" -e "s/{T_SIZE}/0x${TLh}/" > ${ISP_TMPDIR}/${c}.head.script.txt
     ${ISPEDIR}ispe-helpers/script_enc.sh "Init ISP Script" ${ISP_TMPDIR}/${c}.head.script.txt ${ISP_TMPDIR}/${c}.head.script.raw
     ispe ${ISP_IMG} head sets ${ISP_TMPDIR}/${c}.head.script.raw
     ln -sf ${ISP_IMG} ${DEPLOY_DIR_IMAGE}/${c}/ISPBOOOT.BIN
