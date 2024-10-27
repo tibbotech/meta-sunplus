@@ -1,0 +1,22 @@
+BBPATH = "${TOPDIR}"
+BBFILES ?= ""
+
+BBLAYERS  = "##OEROOT##/meta"
+BBLAYERS += " \
+  ##OEROOT##/../meta-openembedded/meta-multimedia \
+  ##OEROOT##/../meta-openembedded/meta-networking \
+  ##OEROOT##/../meta-openembedded/meta-oe \
+  ##OEROOT##/../meta-openembedded/meta-perl \
+  ##OEROOT##/../meta-openembedded/meta-python \
+  ##OEROOT##/../meta-openembedded/meta-webserver \
+  ##OEROOT##/../meta-openembedded/meta-filesystems \
+  "
+
+BBLAYERS += "##OEROOT##/../meta-sunplus"
+
+# uncomment if need
+#BBLAYERS += "##OEROOT##/../meta-openamp"
+
+# tensorflow (face recognition)
+#BBLAYERS += "${TOPDIR}/../meta-scipy"
+#BBLAYERS += "${TOPDIR}/../meta-tensorflow"

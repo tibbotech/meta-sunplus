@@ -15,11 +15,13 @@ do_compile() {
 }
 
 do_deploy() {
- install -p -m0644 ${B}/bin/rom.bin ${DEPLOY_DIR_IMAGE}/a926.bin
- touch ${DEPLOY_DIR_IMAGE}/a926-empty.bin
+# install -p -m0644 ${B}/bin/rom.bin ${DEPLOY_DIR_IMAGE}/a926.bin
+ touch ${B}/bin/a926-empty.bin
  export MKIMAGE=${DEPLOY_DIR_IMAGE}/sp_tools/mkimage;
- ${STAGING_DIR_NATIVE}/sp_tools/add_uhdr.sh nonos_B ${DEPLOY_DIR_IMAGE}/a926.bin ${DEPLOY_DIR_IMAGE}/a926.img arm 0x100040 0x100040
- ${STAGING_DIR_NATIVE}/sp_tools/add_uhdr.sh nonos_B ${DEPLOY_DIR_IMAGE}/a926-empty.bin ${DEPLOY_DIR_IMAGE}/a926-empty.img arm 0x100040 0x100040
+ ${STAGING_DIR_NATIVE}/sp_tools/add_uhdr.sh nonos_B ${B}/bin/rom.bin ${B}/bin/rom.img arm 0x100040 0x100040
+ ${STAGING_DIR_NATIVE}/sp_tools/add_uhdr.sh nonos_B ${B}/bin/a926-empty.bin ${B}/bin/a926-empty.img arm 0x100040 0x100040
+ install -p -m0644 ${B}/bin/rom.img ${DEPLOY_DIR_IMAGE}/a926.img
+ install -p -m0644 ${B}/bin/a926-empty.img ${DEPLOY_DIR_IMAGE}/a926-empty.img
 }
 
 FILES:${PN} += "*"

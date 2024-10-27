@@ -5,8 +5,8 @@ LICENSE = "GPL-3.0-or-later"
 
 SRCREV_FORMAT="draminit_xboot"
 
-SRCREV_draminit = "9f94d93c2c739f3a78dfd44339b5284e39ccf401"
-SRCREV_xboot = "8c36569de26a7b6180e51caff315c458e241c648"
+SRCREV_draminit = "f79fba1c057e702bce084cb29df5cd2064903dd9"
+SRCREV_xboot = "512282fcc0f290018862939f2b07bdaee1d04e7e"
 
 SRC_URI = "\
 git://github.com/tibbotech/plus1_draminit.git;protocol=https;name=draminit;branch=master;destsuffix=draminit; \

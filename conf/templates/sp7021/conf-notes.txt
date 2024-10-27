@@ -1,0 +1,34 @@
+Image building:
+ MACHINE=xMx [DISTRO=xDx] bitbake mc:xMx:xIx
+SDK building:
+ MACHINE=xMx [DISTRO=xDx] bitbake -c populate_sdk mc:xMx:xIx
+
+ , where
+    xMx is machine {sp7021,sp7021-arm5}
+    xDx is distro {defaultsetup}
+    xIx is image name
+
+Machines:
+ "sp7021" is sp7021-SoC
+ "sp7021-arm5" is firmware for ARM5 coprocessor
+
+Distros:
+ "defaultsetup" - basic OE distro (by default)
+
+Images:
+ "core-image-minimal" is small (~15MB) Yocto busybox only image
+ "core-image-base" is complete (~85MB) Yocto cli image
+
+Additional images:
+ imim-spmn	// (0) + (2)
+ imgm-spmt	// (0) + (3)
+ imgm-spba	// Build Applience image
+ meta-toolchain
+ adt-installer
+ meta-ide-support
+
+Examples:
+ MACHINE=sp7021 bitbake mc:sp7021:core-image-minimal
+ MACHINE=sp7021 bitbake mc:sp7021:core-image-base
+ MACHINE=sp7021 bitbake mc:sp7021-arm5:xboot
+ MACHINE=sp7021 bitbake -c populate_sdk mc:sp7021:core-image-base

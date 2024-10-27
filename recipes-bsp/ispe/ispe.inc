@@ -1,15 +1,17 @@
 DESCRIPTION = "ISP (ISPBOOOT.BIN) Image Editor"
 SUMMARY = "ISPEditor"
 HOMEPAGE = "https://www.tibbo.com/"
+MAINTAINER = "Dmitry Dvorkin <dvorkin@tibbo.com>"
 SECTION = "devel"
 LICENSE = "GPL-3.0-or-later"
 
 inherit deploy autotools autotools-brokensep
 
+SRC_URI = "git://github.com/tibbotech/ispe.git;protocol=https;branch=main"
+
 S="${WORKDIR}/git"
 
 do_install() {
-# oe_runmake 'DESTDIR=${D}/${base_prefix}' install
  oe_runmake 'DESTDIR=${D}/${bindir}' install
 }
 
@@ -19,11 +21,9 @@ do_deploy() {
 
 addtask do_deploy after do_compile before do_build
 
-#do_configure[noexec] = "1"
+do_configure[noexec] = "1"
 
 BBCLASSEXTEND = "native"
-
-#SYSROOT_DIRS_NATIVE += "${base_prefix}/sp_tools"
 
 DEPENDS += "openssl"
 RDEPENDS:${PN} += "bash"

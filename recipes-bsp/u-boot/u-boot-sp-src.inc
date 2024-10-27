@@ -1,9 +1,7 @@
-HOMEPAGE = "http://www.denx.de/wiki/U-Boot/WebHome"
-SECTION = "bootloaders"
-DEPENDS += "flex-native bison-native"
-LICENSE = "GPL-2.0-only"
 
-PE = "1"
+FILESEXTRAPATHS:prepend := "${THISDIR}/u-boot:"
+
+LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
 
 SRCREV = "07b4a26035324dfd7ba7b2b3c256e9cb9bf4235f"
 
@@ -22,8 +20,3 @@ SRC_URI += "file://sandbox_defconfig.patch"
 SRC_URI += "file://Makefile.dtsev.patch"
 SRC_URI += "file://sp7021-ev.dts.patch"
 
-S = "${WORKDIR}/git"
-B = "${WORKDIR}/build"
-do_configure[cleandirs] = "${B}"
-
-LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"

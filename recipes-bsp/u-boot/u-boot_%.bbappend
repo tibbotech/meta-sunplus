@@ -1,4 +1,6 @@
 
+require u-boot-sp-src.inc
+
 do_deploy:append() {
  export MKIMAGE=${DEPLOY_DIR_IMAGE}/sp_tools/mkimage;
 
@@ -31,4 +33,4 @@ do_deploy:append() {
 
 DEPENDS += "isp-native"
 # requires mkimage existance to be deployed correctly
-do_deploy[depends] += "u-boot-mkimage-native:do_deploy"
+do_deploy[depends] += "${PN}-mkimage-native:do_deploy"

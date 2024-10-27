@@ -39,14 +39,16 @@ UBOOT_CONFIG[a7021_ppg2] = "sp7021_tppg2_defconfig"
 UBOOT_ENTRYPOINT = "0x00308000"
 UBOOT_LOADADDRESS = "0x00308000"
 
+# if we have initramfs or not
+DV_K_IFINITR="${KERNEL_IMAGETYPE}-${@bb.utils.contains("INITRAMFS_IMAGE_BUNDLE", "1", "initramfs-", "", d)}${MACHINE}.img"
+
 IMAGE_BOOT_FILES  = "${WKS_UBOOT};u-boot.img"
 IMAGE_BOOT_FILES += "sdcard_uEnv.txt;uEnv.txt"
 #IMAGE_BOOT_FILES += "a926.img"
-IMAGE_BOOT_FILES += "${KERNEL_IMAGETYPE}-initramfs-${MACHINE}.img;${KERNEL_IMAGETYPE}"
+IMAGE_BOOT_FILES += "${DV_K_IFINITR};${KERNEL_IMAGETYPE}"
 IMAGE_BOOT_FILES += "${KERNEL_IMAGETYPE}-${MACHINE}.img;${KERNEL_IMAGETYPE}-noinitrd"
 #IMAGE_BOOT_FILES += "ISPBOOOT.BIN"
-# move this
-IMAGE_BOOT_FILES += "sp7021-ltpp3g2-empty.dtb;dtb"
+IMAGE_BOOT_FILES += "${WKS_DTB};dtb"
 
 # new for ISP
 IMAGE_CLASSES += "isp_image"
@@ -71,7 +73,7 @@ ISP_CONFIG[emmc0] += "env;"
 ISP_CONFIG[emmc0] += "env_redund;"
 ISP_CONFIG[emmc0] += "nonos;../${SOC_B}/${ISP_A926_BIN}"
 ISP_CONFIG[emmc0] += "dtb;${ISP_VAR_DTB}"
-ISP_CONFIG[emmc0] += "kernel;${KERNEL_IMAGETYPE}-initramfs-${MACHINE}.img"
+ISP_CONFIG[emmc0] += "kernel;${DV_K_IFINITR}"
 ISP_CONFIG[emmc0] += "rootfs;${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.ext4"
 
 ISP_EMMCOF[emmc0] += "uboot1;0x22"
@@ -106,7 +108,7 @@ ISP_CONFIG[nand0] += "env;"
 ISP_CONFIG[nand0] += "env_redund;"
 ISP_CONFIG[nand0] += "nonos;../${SOC_B}/${ISP_A926_BIN}"
 ISP_CONFIG[nand0] += "dtb;${ISP_VAR_DTB}"
-#ISP_CONFIG[nand0] += "kernel;${KERNEL_IMAGETYPE}-initramfs-${MACHINE}.img"
+#ISP_CONFIG[nand0] += "kernel;${DV_K_IFINITR}"
 ISP_CONFIG[nand0] += "kernel;${KERNEL_IMAGETYPE}-${MACHINE}.img"
 ISP_CONFIG[nand0] += "rootfs;${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.ubifs"
 

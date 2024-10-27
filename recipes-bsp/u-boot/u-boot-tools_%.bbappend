@@ -1,3 +1,6 @@
+
+require u-boot-sp-src.inc
+
 inherit deploy
 
 do_deploy() {
@@ -6,4 +9,3 @@ do_deploy() {
 }
 
 addtask do_deploy after do_compile before do_build
-

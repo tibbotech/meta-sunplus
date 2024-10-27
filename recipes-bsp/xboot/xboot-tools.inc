@@ -1,4 +1,4 @@
-DESCRIPTION = "First step bootloader tools for q628 (${XBOOT_CONFIG})"
+DESCRIPTION = "First step bootloader tools for S+ SoCs"
 SUMMARY = "XBoot bootloader tools"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
