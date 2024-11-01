@@ -8,9 +8,6 @@ COMPATIBLE_HOST = "(arm).*-linux"
 COMPATIBLE_MACHINE = "(sp7021-arm5)"
 
 SRC_URI += "file://Makefile.autoc.patch"
-SRC_URI += "file://new/Makefile.patch"
-SRC_URI += "file://new/draminit.main.mk.patch;patchdir=${WORKDIR}/"
-SRC_URI += "file://new/dwc.Makefile.patch;patchdir=${WORKDIR}/"
 
 S = "${WORKDIR}/xboot"
 
