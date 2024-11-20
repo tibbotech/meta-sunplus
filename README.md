@@ -25,7 +25,7 @@ Contains:
 OEBR=X
 BBBR=Y
 
-W="~/workspace/tibbo.${OEBR}.0/"
+W=~/workspace/tibbo.${OEBR}.0/
 install -d ${W}/layers
 cd ${W}/layers/
 git clone -b ${OEBR} https://git.openembedded.org/meta-openembedded
