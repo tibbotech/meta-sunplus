@@ -22,11 +22,11 @@ SRC_URI += "file://kmeta;type=kmeta;name=kmeta;destsuffix=kmeta"
 #SRCREV_machine:sp7021 = "e81c7196d43ee83e0c05a9ac666cfe7a5fbd2ce9"
 SRCREV_machine = "e81c7196d43ee83e0c05a9ac666cfe7a5fbd2ce9"
 # 5.4 master
-#SRCREV_machine:sp7021 = "885348468513a36866d50638949c8bb2b6bafd35"
-SRCREV_machine = "885348468513a36866d50638949c8bb2b6bafd35"
+#SRCREV_machine:sp7021 = "fd427284c35aefb0aec1739fe1061dca8f7b8ecb"
+SRCREV_machine = "fd427284c35aefb0aec1739fe1061dca8f7b8ecb"
 
 # temporary it is the copy
-SRCREV = "885348468513a36866d50638949c8bb2b6bafd35"
+SRCREV = "fd427284c35aefb0aec1739fe1061dca8f7b8ecb"
 
 # if using meta from master
 #SRCREV_meta ?= "cebe198870d781829bd997a188cc34d9f7a61023"
