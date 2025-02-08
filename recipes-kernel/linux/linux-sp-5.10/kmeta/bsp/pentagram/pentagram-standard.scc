@@ -53,6 +53,6 @@ include features/fuse/fuse.scc
 include features/uio/uio.scc
 #include features/netfilter/netfilter.scc
 
-include sound.scc
+#include sound.scc
 include 1w/1w-gpio.scc
 include 1w/1w-slaves.scc
