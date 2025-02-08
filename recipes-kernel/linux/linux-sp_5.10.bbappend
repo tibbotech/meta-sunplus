@@ -87,4 +87,8 @@ do_deploy:append() {
 #KERNEL_CONFIG_COMMAND = "oe_runmake_call -C ${S} O=${B} pentagram_sc7021_achip_emu_defconfig"
 #KERNEL_CONFIG_COMMAND = "oe_runmake_call -C ${S} O=${B} defconfig"
 
+KERNEL_FEATURES:append = "${@bb.utils.contains("MACHINE_FEATURES", "usbgadget", " bsp/pentagram/usb/usb_otg.scc features/usb/usb-gadgets.scc", "" ,d)}"
+KERNEL_FEATURES:append = "${@bb.utils.contains('MACHINE_FEATURES', 'vfat', ' cfg/fs/vfat.scc', '', d)}"
+KERNEL_FEATURES:append = "${@bb.utils.contains('MACHINE_FEATURES', 'alsa', ' bsp/pentagram/sound.scc', '', d)}"
+
 DEPENDS += "isp-native"
