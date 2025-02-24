@@ -10,8 +10,8 @@ LINUX_VERSION_EXTENSION ?= "-sp-${LINUX_KERNEL_TYPE}"
 # may be moved to /machine/ config
 KMACHINE = "pentagram"
 
-#KBRANCH:tppg2 = "kernel_5.10"
-KBRANCH = "kernel_5.10"
+#KBRANCH:tppg2 = "kernel_5.10.59"
+KBRANCH = "kernel_5.10.59"
 
 #SRC_URI = "git://git@113.196.136.131:22/qac628/linux/kernel;protocol=ssh;name=machine;branch=${KBRANCH}"
 SRC_URI = "git://github.com/tibbotech/plus1_kernel.git;protocol=https;branch=${KBRANCH}"
@@ -19,15 +19,12 @@ SRC_URI += "file://kmeta;type=kmeta;name=kmeta;destsuffix=kmeta"
 #SRC_URI += "file://kernel-meta.tar.gz;type=kmeta;name=meta;destsuffix=${KMETA}"
 #SRC_URI += "git://git.yoctoproject.org/yocto-kernel-cache;type=kmeta;name=meta;branch=yocto-4.19;destsuffix=${KMETA}"
 
-# 4.19
-#SRCREV_machine:tppg2 = "e81c7196d43ee83e0c05a9ac666cfe7a5fbd2ce9"
-SRCREV_machine = "e81c7196d43ee83e0c05a9ac666cfe7a5fbd2ce9"
 # 5.10
-#SRCREV_machine:tppg2 = "dc46ce628e20ac0640f47a0d0d2a45c68388447f"
-SRCREV_machine = "dc46ce628e20ac0640f47a0d0d2a45c68388447f"
+#SRCREV_machine:tppg2 = "dd778e471d406adc47f3713b4e803d6e34948df1"
+SRCREV_machine = "dd778e471d406adc47f3713b4e803d6e34948df1"
 
 # temporary it is the copy
-SRCREV = "dc46ce628e20ac0640f47a0d0d2a45c68388447f"
+SRCREV = "dd778e471d406adc47f3713b4e803d6e34948df1"
 
 # if using meta from master
 #SRCREV_meta ?= "cebe198870d781829bd997a188cc34d9f7a61023"

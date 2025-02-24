@@ -18,15 +18,12 @@ SRC_URI += "file://kmeta;type=kmeta;name=kmeta;destsuffix=kmeta"
 #SRC_URI += "file://kernel-meta.tar.gz;type=kmeta;name=meta;destsuffix=${KMETA}"
 #SRC_URI += "git://git.yoctoproject.org/yocto-kernel-cache;type=kmeta;name=meta;branch=yocto-4.19;destsuffix=${KMETA}"
 
-# 4.19
-#SRCREV_machine:sp7021 = "e81c7196d43ee83e0c05a9ac666cfe7a5fbd2ce9"
-SRCREV_machine = "e81c7196d43ee83e0c05a9ac666cfe7a5fbd2ce9"
 # 5.4 master
-#SRCREV_machine:sp7021 = "fd427284c35aefb0aec1739fe1061dca8f7b8ecb"
-SRCREV_machine = "fd427284c35aefb0aec1739fe1061dca8f7b8ecb"
+#SRCREV_machine:sp7021 = "2892e8488165d59f29f9ea8cd8465144cdc51200"
+SRCREV_machine = "2892e8488165d59f29f9ea8cd8465144cdc51200"
 
 # temporary it is the copy
-SRCREV = "fd427284c35aefb0aec1739fe1061dca8f7b8ecb"
+SRCREV = "2892e8488165d59f29f9ea8cd8465144cdc51200"
 
 # if using meta from master
 #SRCREV_meta ?= "cebe198870d781829bd997a188cc34d9f7a61023"
