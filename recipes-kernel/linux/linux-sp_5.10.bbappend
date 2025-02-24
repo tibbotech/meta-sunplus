@@ -50,7 +50,7 @@ KMETA="kernel-meta"
 #SRC_URI += "file://video/fb_sp7021_main.c.set.patch"
 
 # 485 test
-SRC_URI += "file://uart_485/sp_uart.c.sleep1.patch"
+SRC_URI += "file://uart_485/sunplus-uart.c.sleep1.patch"
 
 # no TPM device by default for sp7021 BPI F2P (fails after 5 min if no device)
 SRC_URI += "file://sp7021-bpi-f2p.dts.noTPM.patch"
