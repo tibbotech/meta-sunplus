@@ -4,14 +4,15 @@ SUMMARY = "Linux kernel (SunPlus,pub)"
 
 COMPATIBLE_MACHINE = "(sp7021|sp7021-arm5)"
 
-LINUX_VERSION = "5.10.59"
+LINUX_VERSION = "5.10.201"
 LINUX_VERSION_EXTENSION ?= "-sp-${LINUX_KERNEL_TYPE}"
 
 # may be moved to /machine/ config
 KMACHINE = "pentagram"
 
-#KBRANCH:tppg2 = "kernel_5.10.59"
-KBRANCH = "kernel_5.10.59"
+#KBRANCH:tppg2 = "kernel_5.10.201"
+#KBRANCH = "kernel_5.10.201"
+KBRANCH = "master"
 
 #SRC_URI = "git://git@113.196.136.131:22/qac628/linux/kernel;protocol=ssh;name=machine;branch=${KBRANCH}"
 SRC_URI = "git://github.com/tibbotech/plus1_kernel.git;protocol=https;branch=${KBRANCH}"
@@ -21,10 +22,10 @@ SRC_URI += "file://kmeta;type=kmeta;name=kmeta;destsuffix=kmeta"
 
 # 5.10
 #SRCREV_machine:tppg2 = "dd778e471d406adc47f3713b4e803d6e34948df1"
-SRCREV_machine = "dd778e471d406adc47f3713b4e803d6e34948df1"
+SRCREV_machine = "fb0e5d435d3042284e20365b410ad220e510536d"
 
 # temporary it is the copy
-SRCREV = "dd778e471d406adc47f3713b4e803d6e34948df1"
+SRCREV = "fb0e5d435d3042284e20365b410ad220e510536d"
 
 # if using meta from master
 #SRCREV_meta ?= "cebe198870d781829bd997a188cc34d9f7a61023"
