@@ -22,10 +22,10 @@ SRC_URI += "file://kmeta;type=kmeta;name=kmeta;destsuffix=kmeta"
 
 # 5.10
 #SRCREV_machine:tppg2 = "dd778e471d406adc47f3713b4e803d6e34948df1"
-SRCREV_machine = "fb0e5d435d3042284e20365b410ad220e510536d"
+SRCREV_machine = "1adee32390473cd078b6e29a2871175c04a83c1a"
 
 # temporary it is the copy
-SRCREV = "fb0e5d435d3042284e20365b410ad220e510536d"
+SRCREV = "1adee32390473cd078b6e29a2871175c04a83c1a"
 
 # if using meta from master
 #SRCREV_meta ?= "cebe198870d781829bd997a188cc34d9f7a61023"
