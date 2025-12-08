@@ -1,0 +1,18 @@
+--- a/drivers/tty/serial/sunplus-uart.c	2025-02-25 01:24:45.153740556 +0300
++++ a/drivers/tty/serial/sunplus-uart.c	2025-02-25 01:43:45.168074594 +0300
+@@ -552,11 +552,15 @@
+ 		// set RTS line ?
+ 		dev_dbg(port->dev, "%s set rts_gpio=%d\n", sp_port->uport.name, val);
+ 		if (sp_port->uport.rs485.delay_rts_before_send > 0) {
++#if 1
++			mdelay( sp_port->uport.rs485.delay_rts_before_send);
++#else
+ 			long nsec = sp_port->uport.rs485.delay_rts_before_send * 1000000;
+ 
+ 			ktime = ktime_set(0, nsec);
+ 			hrtimer_start(&sp_port->DelayRtsBeforeSend, ktime, HRTIMER_MODE_REL);
+ 			return;
++#endif
+ 		}
+ 		ktime = ktime_set(0, 500000); //500us
+ 		hrtimer_start(&sp_port->CheckTXE, ktime, HRTIMER_MODE_REL);

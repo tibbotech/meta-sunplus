@@ -1,0 +1,17 @@
+--- /dev/null	2025-11-28 14:48:16.395907526 +0300
++++ a/arch/arm/boot/dts/sunplus/sp7021-ltpp3g2revD.dts	2025-12-05 23:36:57.229223890 +0300
+@@ -0,0 +1,14 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Device Tree Source for Tibbo LTPP board G2 (Rev. D)
++ *
++ * Copyright (C) Tibbo Technology Co.
++ */
++
++/dts-v1/;
++
++#include "sp7021-ltpp3g2revD.dtsi"
++
++/ {
++	model = "SP7021 LTPP3G2 Rev. D (empty sockets)";
++};
