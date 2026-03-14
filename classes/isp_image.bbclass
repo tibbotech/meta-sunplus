@@ -23,6 +23,8 @@ IMAGE_CMD:isp () {
  bbnote "isp IMAGE_NAME_SUFFIX:${IMAGE_NAME_SUFFIX}"
  bbnote "isp IMAGE_ROOTFS:${IMAGE_ROOTFS}"
  bbnote "isp ISP_CONFIG:${ISP_CONFIG}"
+ bbnote "isp ISP_PROGRESS:${ISP_PROGRESS}"
+ bbnote "isp ISP_VERIFY:${ISP_VERIFY}"
  bbnote "isp WORKDIR:${WORKDIR}"
  bbnote "isp DEPLOY_DIR_IMAGE:${DEPLOY_DIR_IMAGE}"
  ls -1 ${IMGDEPLOYDIR}/
@@ -157,7 +159,7 @@ IMAGE_CMD:isp () {
 
     if [ ! -z "${boot_ext}" ]; then
       bbnote "${c} Generating the ISP(${boot_ext}) script..."
-      ISPEDIR=${ISPEDIR} ${ISPEDIR}ispe-helpers/genisp.${boot_ext}.sh ${ISP_IMG} ${ISP_TMPDIR}/${c}.${boot_ext}.txt
+      PROGRESS=${ISP_PROGRESS} VERIFY=${ISP_VERIFY} ISPEDIR=${ISPEDIR} ${ISPEDIR}ispe-helpers/genisp.${boot_ext}.sh ${ISP_IMG} ${ISP_TMPDIR}/${c}.${boot_ext}.txt
       ${ISPEDIR}ispe-helpers/script_enc.sh "ISP Script" ${ISP_TMPDIR}/${c}.${boot_ext}.txt ${ISP_TMPDIR}/${c}.${boot_ext}.raw
       bbnote "${c} Installing the ISP(${boot_ext}) script..."
       ${ISPEDIR}ispe ${ISP_IMG} -vv setb eof ${ISP_TMPDIR}/${c}.${boot_ext}.raw
