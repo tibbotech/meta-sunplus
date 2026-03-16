@@ -4,7 +4,7 @@ HOMEPAGE = "https://tibbo.com/"
 SECTION = "devel"
 LICENSE = "GPL-3.0-or-later"
 
-SRCREV="${AUTOREV}"
+SRCREV="a5d48e558168912b07b601bddf022217e0ef8e3e"
 
 SRC_URI  = "git://github.com/tibbotech/spmake.git;protocol=https;branch=main"
 
