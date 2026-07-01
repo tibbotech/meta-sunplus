@@ -1,8 +1,8 @@
 
 SRC_URI += "file://q628_Rev2_EMMC_defconfig.nonor.patch"
-SRC_URI += "file://q628_emmc_no_otp.patch"
-SRC_URI += "file://q628_nand_no_otp.patch"
-SRC_URI += "file://q628_emmc_no_key.patch"
+SRC_URI += "${@bb.utils.contains("MACHINE_FEATURES", "spsign", "", "file://q628_emmc_no_otp.patch",d)}"
+SRC_URI += "${@bb.utils.contains("MACHINE_FEATURES", "spsign", "", "file://q628_nand_no_otp.patch",d)}"
+SRC_URI += "${@bb.utils.contains("MACHINE_FEATURES", "spsign", "", "file://q628_emmc_no_key.patch",d)}"
 
 #DESCRIPTION:append = " +MD press -> SD"
 #
