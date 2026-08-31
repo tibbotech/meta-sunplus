@@ -4,6 +4,7 @@ do_image_isp[depends]  = "ispe-native:do_populate_sysroot"
 do_image_isp[depends] += "u-boot-tools-native:do_populate_sysroot"
 do_image_isp[depends] += "virtual/bootloader:do_deploy"
 do_image_isp[depends] += "virtual/kernel:do_deploy"
+do_image_isp[depends] += "${@bb.utils.contains('MACHINE_FEATURES','optee','fip-sp:do_deploy','',d)}"
 
 dv_2_arr () {
  i=0
@@ -183,8 +184,10 @@ IMAGE_CMD:isp () {
 python () {
     #bb.note( 'xxx:%s' % d.getVar('MACHINE'))
     csa = d.getVarFlags('ISP_CONFIG')
-    for i, v in csa.items():
+    for i, vX in csa.items():
+        v = d.expand(vX)
         #bb.note( 'i:%s' % i)
+        #bb.note( 'v:%s' % v)
         d.appendVar('IMG_ISP_P', ' ')
         d.appendVar('IMG_ISP_F', ' ')
         d.appendVar('IMG_ISP_O', ' ')
@@ -209,7 +212,7 @@ python () {
     for i, v in csa.items():
         # *** handle ISP_BOOTYP
         d.appendVar('IMG_ISP_BOOTYP', ' ')
-        v=d.getVarFlag('ISP_BOOTYP', i)
+        v=d.getVarFlag('ISP_BOOTYP', i, True)
         if v == "":
             v = "emmc"
         d.appendVar('IMG_ISP_BOOTYP', v)
@@ -220,7 +223,7 @@ python () {
         d.appendVar('IMG_ISP_PFLAGS_V', '|')
         ba0=[]
         ba1=[]
-        v=d.getVarFlag('ISP_PFLAGS', i)
+        v=d.getVarFlag('ISP_PFLAGS', i, True)
         if v is None:
             continue
         for vv in v.strip().split(' '):
@@ -238,7 +241,7 @@ python () {
         d.appendVar('IMG_ISP_NANDOF_V', '|')
         ba0=[]
         ba1=[]
-        v=d.getVarFlag('ISP_NANDOF', i)
+        v=d.getVarFlag('ISP_NANDOF', i, True)
         if v is None:
             continue
         for vv in v.strip().split(' '):
@@ -256,7 +259,7 @@ python () {
         d.appendVar('IMG_ISP_EMMCOF_V', '|')
         ba0=[]
         ba1=[]
-        v=d.getVarFlag('ISP_EMMCOF', i)
+        v=d.getVarFlag('ISP_EMMCOF', i, True)
         if v is None:
             continue
         for vv in v.strip().split(' '):
@@ -274,7 +277,7 @@ python () {
         d.appendVar('IMG_ISP_SETBOO_V', '|')
         ba0=[]
         ba1=[]
-        v=d.getVarFlag('ISP_SETBOO', i)
+        v=d.getVarFlag('ISP_SETBOO', i, True)
         if v is None:
             continue
         for vv in v.strip().split(' '):

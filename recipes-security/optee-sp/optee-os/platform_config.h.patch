@@ -1,0 +1,14 @@
+--- a/core/arch/arm/plat-sp/platform_config.h	2026-08-13 09:08:29.579701681 +0300
++++ a/core/arch/arm/plat-sp/platform_config.h	2026-08-14 01:09:54.777763213 +0300
+@@ -19,6 +19,11 @@
+ #define CONSOLE_SP_UART_BASE	0xF800F900 /* UARTDBG   G498.0*/
+ #define SP_UART_REG_SIZE        0x80
+ 
++#elif defined(PLATFORM_FLAVOR_sp7021)  /* #ifdef PLATFORM_FLAVOR_SP7350 */
++
++#define CONSOLE_SP_UART_BASE	0x9C000900 /* UARTDBG   G498.0*/
++#define SP_UART_REG_SIZE        0x80
++
+ #endif /* #ifdef PLATFORM_FLAVOR_Q645 */
+ 
+ #define SP_SPI_FLASH_BASE   0xF0000000

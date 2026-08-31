@@ -1,0 +1,57 @@
+/dts-v1/;
+
+/ {
+ description = "Kernel Image with OP-TEE and DTB";
+ creator = "U-Boot mkimage";
+
+ images {
+	kernel-1 {
+	    data = /incbin/("${DEPLOY_DIR_IMAGE}/${DV_K_IFINITR}");
+	    description = "kernel xxx";
+	    type = "kernel";
+	    arch = "arm";
+	    os = "linux";
+	    compression = "none";
+	    load = <0xc0008000>;
+	    entry = <0xc0008000>;
+	    hash-1 {
+		algo = "crc32";
+	    };
+	};
+
+	optee-1 {
+            data = /incbin/("${DEPLOY_DIR_IMAGE}/optee/tee.bin");
+	    type = "tee";
+	    arch = "arm";
+	    os = "tee";
+	    compression = "none";
+	    load = <0xfe000000>; /* Must match OP-TEE compiled base CFG_TEE_CORE_NB_PA */
+	    entry = <0x02000000>;
+	    hash-1 {
+		algo = "crc32";
+	    };
+	};
+
+	fdt-1 {
+            data = /incbin/("${DEPLOY_DIR_IMAGE}/${ISP_VAR_DTB}");
+	    description = "sp7021-ltpp3g2revD";
+	    type = "flat_dt";
+	    arch = "arm";
+	    compression = "none";
+	    hash-1 {
+		algo = "crc32";
+	    };
+	};
+ };
+
+ configurations {
+	default = "conf-1";
+	conf-1 {
+	    description = "sp7021-ltpp3g2revD";
+	    kernel = "kernel-1";
+	    loadables = "kernel-1";
+	    tee = "optee-1";
+	    fdt = "fdt-1";
+	};
+ };
+};

@@ -1,0 +1,64 @@
+--- a/core/arch/arm/plat-sp/conf.mk	2026-08-13 09:08:29.579701681 +0300
++++ a/core/arch/arm/plat-sp/conf.mk	2026-08-14 01:06:47.277066106 +0300
+@@ -1,23 +1,39 @@
+-
+-include core/arch/arm/cpu/cortex-armv8-0.mk
+-CFG_ARM64_core ?= y
+-
+-$(call force,CFG_SP_UART,y)   
+-$(call force,CFG_GIC,y)		 
+-$(call force,CFG_WITH_ARM_TRUSTED_FW,y) 
+-
+-$(call force,CFG_TEE_CORE_NB_CORE,4)   
+-$(call force,CFG_WITH_LPAE,y)
+-
+-$(call force,CFG_SECURE_TIME_SOURCE_CNTPCT,y)  
+-
+-CFG_SHMEM_START ?= 0x0F300000     
+-CFG_SHMEM_SIZE  ?= 0x00400000
+-
++PLATFORM_FLAVOR ?= sp7350
++
++q645-flavorlist = \
++	q645 \
++
++sp7350-flavorlist = \
++	sp7350 \
++
++sp7021-flavorlist = \
++	sp7021 \
++
++$(call force,CFG_SP_UART,y)
++$(call force,CFG_GIC,y)
++$(call force,CFG_TEE_CORE_NB_CORE,4)
++
++ifneq (,$(filter $(PLATFORM_FLAVOR),$(q645-flavorlist) $(sp7350-flavorlist)))
++$(call force,CFG_SECURE_TIME_SOURCE_CNTPCT,y)
++$(call force,CFG_WITH_ARM_TRUSTED_FW,y)
++include core/arch/arm/cpu/cortex-armv8-0.mk
++$(call force,CFG_ARM64_core,y)
++$(call force,CFG_WITH_LPAE,y)
++CFG_SHMEM_START ?= 0x0F300000
++CFG_SHMEM_SIZE  ?= 0x00400000
+ CFG_TZDRAM_START ?= 0x300000			/*  the same as BL32_BASE  in tf-a*/
+-CFG_TZDRAM_SIZE  ?= 0x00200000
+-
+-CFG_TEE_RAM_VA_SIZE ?= 0x00100000
+-
+-CFG_WITH_STATS ?= y
+-
++CFG_TZDRAM_SIZE  ?= 0x00200000
++else ifneq (,$(filter $(PLATFORM_FLAVOR),$(sp7021-flavorlist)))
++$(call force,CFG_SECURE_TIME_SOURCE_REE,y)
++include core/arch/arm/cpu/cortex-a9.mk
++CFG_SHMEM_START ?= 0x0F300000
++CFG_SHMEM_SIZE  ?= 0x00400000
++CFG_TZDRAM_START ?= 0x300000			/*  the same as BL32_BASE  in tf-a*/
++CFG_TZDRAM_SIZE  ?= 0x00200000
++else
++$(error Unsupported PLATFORM_FLAVOR "$(PLATFORM_FLAVOR)")
++endif
++
++CFG_TEE_RAM_VA_SIZE ?= 0x00100000
++
++CFG_WITH_STATS ?= y
