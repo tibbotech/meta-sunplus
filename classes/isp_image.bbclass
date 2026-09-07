@@ -6,6 +6,12 @@ do_image_isp[depends] += "virtual/bootloader:do_deploy"
 do_image_isp[depends] += "virtual/kernel:do_deploy"
 do_image_isp[depends] += "${@bb.utils.contains('MACHINE_FEATURES','optee','fip-sp:do_deploy','',d)}"
 
+do_image_isp[deptask] += "do_image_complete"
+do_image_isp[deptask] += "do_image_ext4"
+do_image_isp[deptask] += "do_image_ubi"
+
+do_image_isp[vardeps] += "ISP_CONFIG ISP_BOOTYP ISP_PFLAGS ISP_NANDOF ISP_EMMCOF ISP_SETBOO IMG_ISP_P IMG_ISP_F IMG_ISP_O IMG_ISP_BOOTYP IMG_ISP_PFLAGS_K IMG_ISP_PFLAGS_V IMG_ISP_NANDOF_K IMG_ISP_NANDOF_V IMG_ISP_EMMCOF_K IMG_ISP_EMMCOF_V IMG_ISP_SETBOO_K IMG_ISP_SETBOO_V"
+
 dv_2_arr () {
  i=0
  o_IFS="${IFS}"
@@ -181,9 +187,11 @@ IMAGE_CMD:isp () {
  done
 }
 
-python () {
+python do_setispvars () {
+    d.setVar('BB_DONT_CACHE', '1')
     #bb.note( 'xxx:%s' % d.getVar('MACHINE'))
     csa = d.getVarFlags('ISP_CONFIG')
+    #for i, v in csa.items():
     for i, vX in csa.items():
         v = d.expand(vX)
         #bb.note( 'i:%s' % i)
@@ -209,7 +217,8 @@ python () {
         d.appendVar('IMG_ISP_F', ','.join(pa1))
         d.appendVar('IMG_ISP_O', ','.join(pa2))
 
-    for i, v in csa.items():
+    for i, vX in csa.items():
+        v = d.expand(vX)
         # *** handle ISP_BOOTYP
         d.appendVar('IMG_ISP_BOOTYP', ' ')
         v=d.getVarFlag('ISP_BOOTYP', i, True)
@@ -217,7 +226,8 @@ python () {
             v = "emmc"
         d.appendVar('IMG_ISP_BOOTYP', v)
 
-    for i, v in csa.items():
+    for i, vX in csa.items():
+        v = d.expand(vX)
         # *** handle ISP_PFLAGS
         d.appendVar('IMG_ISP_PFLAGS_K', '|')
         d.appendVar('IMG_ISP_PFLAGS_V', '|')
@@ -235,7 +245,8 @@ python () {
         d.appendVar('IMG_ISP_PFLAGS_K', ','.join(ba0))
         d.appendVar('IMG_ISP_PFLAGS_V', ','.join(ba1))
 
-    for i, v in csa.items():
+    for i, vX in csa.items():
+        v = d.expand(vX)
         # *** handle ISP_NANDOF
         d.appendVar('IMG_ISP_NANDOF_K', '|')
         d.appendVar('IMG_ISP_NANDOF_V', '|')
@@ -253,7 +264,8 @@ python () {
         d.appendVar('IMG_ISP_NANDOF_K', ','.join(ba0))
         d.appendVar('IMG_ISP_NANDOF_V', ','.join(ba1))
 
-    for i, v in csa.items():
+    for i, vX in csa.items():
+        v = d.expand(vX)
         # *** handle ISP_EMMCOF
         d.appendVar('IMG_ISP_EMMCOF_K', '|')
         d.appendVar('IMG_ISP_EMMCOF_V', '|')
@@ -271,7 +283,8 @@ python () {
         d.appendVar('IMG_ISP_EMMCOF_K', ','.join(ba0))
         d.appendVar('IMG_ISP_EMMCOF_V', ','.join(ba1))
 
-    for i, v in csa.items():
+    for i, vX in csa.items():
+        v = d.expand(vX)
         # *** handle ISP_SETBOO
         d.appendVar('IMG_ISP_SETBOO_K', '|')
         d.appendVar('IMG_ISP_SETBOO_V', '|')
@@ -291,3 +304,5 @@ python () {
             
     #bb.note('xxxxx')
 }
+
+do_image_isp[prefuncs] += "do_setispvars"
