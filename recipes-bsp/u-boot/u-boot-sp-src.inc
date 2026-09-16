@@ -3,6 +3,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/u-boot:"
 
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
 
+#SRCREV = "07b4a26035324dfd7ba7b2b3c256e9cb9bf4235f"
 SRCREV = "07b4a26035324dfd7ba7b2b3c256e9cb9bf4235f"
 
 SRC_URI = "git://github.com/tibbotech/plus1_uboot.git;protocol=https;branch=master"
@@ -20,3 +21,8 @@ SRC_URI += "file://sandbox_defconfig.patch"
 SRC_URI += "file://Makefile.dtsev.patch"
 SRC_URI += "file://sp7021-ev.dts.patch"
 
+# for FIP/OP-TEE
+SRC_URI += "${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'file://fip/sp7021_emmc_c_defconfig.fip.patch', '', d)}"
+#SRC_URI += "${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'file://fip/sp7021_nand_c_defconfig.fip.patch', '', d)}"
+SRC_URI += "${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'file://fip/pentagram_common.h.fip.patch', '', d)}"
+SRC_URI += "${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'file://config/optee.cfg', '', d)}"
