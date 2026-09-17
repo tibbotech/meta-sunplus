@@ -53,8 +53,8 @@
 +include core/arch/arm/cpu/cortex-a9.mk
 +CFG_SHMEM_START ?= 0x0F300000
 +CFG_SHMEM_SIZE  ?= 0x00400000
-+CFG_TZDRAM_START ?= 0x300000			/*  the same as BL32_BASE  in tf-a*/
-+CFG_TZDRAM_SIZE  ?= 0x00200000
++CFG_TZDRAM_START ?= 0x10000			/*  the same as BL32_BASE  in tf-a*/
++CFG_TZDRAM_SIZE  ?= 0x001F0000
 +else
 +$(error Unsupported PLATFORM_FLAVOR "$(PLATFORM_FLAVOR)")
 +endif
