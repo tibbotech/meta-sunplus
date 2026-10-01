@@ -5,37 +5,15 @@ SECTION = "devel"
 LICENSE = "GPL-3.0-or-later"
 COMPATIBLE_MACHINE = "^(sp7021|sp7053|q645)$"
 
-inherit deploy
+inherit deploy fileexpander
 
 SRC_URI += "file://sp7021-optee.its.in"
 SRC_URI += "file://sp7021-tfa.its.in"
 
-def dv_parse_its(d,file_in,file_out):
-    with open(file_in, "r") as f:
-        content = f.read()
-
-    expanded = d.expand(content)
-
-    with open(file_out, "w") as f:
-        f.write(expanded)
-    return f"x"
-
-def dv_find_its(d, dir):
-    import os,glob
-    globbed = glob.glob(dir, recursive=True)
-    print( "globbed: %s" % globbed)
-    return globbed
-
-python do_configure () {
-    files = dv_find_its(d, d.getVar( 'WORKDIR') + '/*.its.in')
-    # print("xxx: %s" % files)
-    for file in files:
-        fileA0 = os.path.splitext(file)
-        fileA1 = os.path.splitext(fileA0[0])
-        x = fileA1[0] + '.its'
-        print("ITS template:: %s -> %s" % (file, x))
-        dv_parse_its(d, file, x)
+python do_dvtemplates () {
+    dv_fileexpand( d, '*.its.in', '.its.in')
 }
+addtask dvtemplates before do_compile after do_configure
 
 do_compile() {
  install -d ${D}
