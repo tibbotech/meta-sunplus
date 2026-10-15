@@ -3,7 +3,6 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/u-boot:"
 
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
 
-#SRCREV = "07b4a26035324dfd7ba7b2b3c256e9cb9bf4235f"
 SRCREV = "07b4a26035324dfd7ba7b2b3c256e9cb9bf4235f"
 
 SRC_URI = "git://github.com/tibbotech/plus1_uboot.git;protocol=https;branch=master"
@@ -12,6 +11,7 @@ SRC_URI = "git://github.com/tibbotech/plus1_uboot.git;protocol=https;branch=mast
 SRC_URI += "file://libfdt.i.patch"
 SRC_URI += "file://pentagram_common.h.quiet.patch"
 SRC_URI += "file://sandbox_defconfig.patch"
+SRC_URI += "file://sp_otp.h.wait.patch"
 
 # u-boot mux debug
 #SRC_URI += "file://dbg/pinctrl_sunplus.c.dbg0.patch"

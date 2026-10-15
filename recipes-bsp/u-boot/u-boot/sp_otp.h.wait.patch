@@ -1,0 +1,11 @@
+--- a/include/sp_otp.h	2026-02-01 12:56:42.365703970 +0300
++++ a/include/sp_otp.h	2026-10-13 10:59:08.782616593 +0300
+@@ -93,7 +93,7 @@
+ #define QAK654_EFUSE_SIZE		128
+ 
+ #define OTP_READ_TIMEOUT                20000
+-#define OTP_WAIT_MICRO_SECONDS          100
++#define OTP_WAIT_MICRO_SECONDS          300
+ 
+ /* OTP register map */
+ #define OTP_PROGRAM_CONTROL             0x0C
