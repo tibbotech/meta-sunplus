@@ -1,0 +1,9 @@
+--- a/arch/arm/boot/compressed/piggy.S	2026-10-16 11:52:12.137447771 +0300
++++ a/arch/arm/boot/compressed/piggy.S	2026-10-16 20:29:05.809606047 +0300
+@@ -1,5 +1,5 @@
+ /* SPDX-License-Identifier: GPL-2.0 */
+-	.section .piggydata,#alloc
++	.section .piggydata,"a"
+ 	.globl	input_data
+ input_data:
+ 	.incbin	"arch/arm/boot/compressed/piggy_data"

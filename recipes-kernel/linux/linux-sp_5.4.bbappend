@@ -47,3 +47,7 @@ KERNEL_FEATURES:append = " bsp/pentagram/1w/ds2430/ds2430.scc"
 
 # no TPM device by default for sp7021 BPI F2P (fails after 5 min if no device)
 SRC_URI += "file://sp7021-bpi-f2p.dts.noTPM.patch"
+
+SRC_URI += "file://proc-v7.S.junk.patch"
+SRC_URI += "file://head.S.junk.patch"
+SRC_URI += "file://piggy.S.junk.patch"

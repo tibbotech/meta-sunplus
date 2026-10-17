@@ -1,0 +1,11 @@
+--- a/arch/arm/boot/compressed/head.S	2026-10-16 11:52:12.137269702 +0300
++++ a/arch/arm/boot/compressed/head.S	2026-10-16 20:26:27.131874588 +0300
+@@ -140,7 +140,7 @@
+ #endif
+ 		.endm
+ 
+-		.section ".start", #alloc, #execinstr
++		.section ".start", "ax"
+ /*
+  * sort out different calling conventions
+  */

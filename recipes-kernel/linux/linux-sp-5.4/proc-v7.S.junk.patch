@@ -1,0 +1,11 @@
+--- a/arch/arm/mm/proc-v7.S	2026-10-16 11:52:12.469383532 +0300
++++ a/arch/arm/mm/proc-v7.S	2026-10-16 20:22:05.334360774 +0300
+@@ -644,7 +644,7 @@
+ 	string	cpu_elf_name, "v7"
+ 	.align
+ 
+-	.section ".proc.info.init", #alloc
++	.section ".proc.info.init", "a"
+ 
+ 	/*
+ 	 * Standard v7 proc info content
