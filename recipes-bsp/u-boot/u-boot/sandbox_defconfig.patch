@@ -1,3 +1,6 @@
+Upstream-Status: Inappropriate [local board changes]
+
+===================================================================
 --- a/configs/sandbox_defconfig	2021-10-08 03:30:24.715925605 +0300
 +++ a/configs/sandbox_defconfig	2021-10-08 03:30:54.957159991 +0300
 @@ -283,3 +283,6 @@

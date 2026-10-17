@@ -1,3 +1,6 @@
+Upstream-Status: Inappropriate [debugging]
+
+===================================================================
 --- a/drivers/pinctrl/pinconf-generic.c	2019-02-12 11:50:38.345875734 +0300
 +++ a/drivers/pinctrl/pinconf-generic.c	2019-02-12 14:05:42.872008408 +0300
 @@ -295,6 +295,7 @@

@@ -1,3 +1,6 @@
+Upstream-Status: Inappropriate [debugging]
+
+===================================================================
 --- a/drivers/pinctrl/sppctl/sp7021_gpio_ops.c	2019-10-08 21:24:53.174144541 +0300
 +++ a/drivers/pinctrl/sppctl/sp7021_gpio_ops.c	2019-10-08 21:47:05.127522416 +0300
 @@ -170,6 +170,7 @@

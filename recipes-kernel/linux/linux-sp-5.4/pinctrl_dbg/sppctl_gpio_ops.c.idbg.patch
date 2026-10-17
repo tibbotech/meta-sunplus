@@ -1,3 +1,6 @@
+Upstream-Status: Inappropriate [debugging]
+
+===================================================================
 --- a/drivers/pinctrl/sunplus/sppctl_gpio_ops.c	2022-02-11 00:38:10.860759292 +0300
 +++ a/drivers/pinctrl/sunplus/sppctl_gpio_ops.c	2022-02-11 01:14:24.579281660 +0300
 @@ -16,6 +16,7 @@

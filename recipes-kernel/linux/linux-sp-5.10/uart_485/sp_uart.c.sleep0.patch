@@ -1,3 +1,6 @@
+Upstream-Status: Inappropriate [debugging]
+
+===================================================================
 --- a/drivers/tty/serial/sp_uart.c	2021-07-03 03:25:04.063618568 +0300
 +++ a/drivers/tty/serial/sp_uart.c	2021-07-06 13:14:22.632237869 +0300
 @@ -20,10 +20,11 @@

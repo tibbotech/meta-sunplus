@@ -1,3 +1,6 @@
+Upstream-Status: Inappropriate [debugging]
+
+===================================================================
 --- a/drivers/video/fbdev/sunplus/fb_sp7021/fb_sp7021_main.c	2021-03-18 15:26:08.762926209 +0300
 +++ a/drivers/video/fbdev/sunplus/fb_sp7021/fb_sp7021_main.c	2021-03-29 16:29:05.941739528 +0300
 @@ -84,6 +84,8 @@

@@ -1,3 +1,6 @@
+Upstream-Status: Inappropriate [local board changes]
+
+===================================================================
 --- a/arch/arm/dts/Makefile	2021-10-30 12:45:51.720639152 +0300
 +++ a/arch/arm/dts/Makefile	2021-10-30 23:30:32.069081014 +0300
 @@ -1035,6 +1035,7 @@

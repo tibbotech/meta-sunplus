@@ -1,3 +1,6 @@
+Upstream-Status: Inappropriate [debugging]
+
+===================================================================
 --- a/drivers/pinctrl/devicetree.c	2019-02-15 10:44:40.167432745 +0300
 +++ a/drivers/pinctrl/devicetree.c	2019-02-16 13:20:59.242973840 +0300
 @@ -204,18 +204,21 @@

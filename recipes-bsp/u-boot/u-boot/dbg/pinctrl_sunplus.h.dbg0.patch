@@ -1,3 +1,6 @@
+Upstream-Status: Inappropriate [debugging]
+
+===================================================================
 --- a/drivers/pinctrl/sunplus/pinctrl_sunplus.h	2020-09-28 20:10:38.110890766 +0300
 +++ a/drivers/pinctrl/sunplus/pinctrl_sunplus.h	2020-09-29 00:45:57.017733229 +0300
 @@ -5,7 +5,7 @@

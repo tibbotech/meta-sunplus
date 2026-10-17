@@ -1,3 +1,6 @@
+Upstream-Status: Inappropriate [debugging]
+
+===================================================================
 --- a/drivers/tty/serial/sunplus-uart.c	2025-02-25 01:24:45.153740556 +0300
 +++ a/drivers/tty/serial/sunplus-uart.c	2025-02-25 01:43:45.168074594 +0300
 @@ -552,11 +552,15 @@
