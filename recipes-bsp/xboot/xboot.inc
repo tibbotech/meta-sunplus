@@ -11,6 +11,8 @@ SRC_URI += "file://Makefile.autoc.patch"
 
 S = "${WORKDIR}/xboot"
 
+#do_deploy[sstate-outputdirs] = "${DEPLOY_DIR}/images/tppg2/"
+
 inherit xboot autotools deploy
 
 HOST_CC_ARCH=""
